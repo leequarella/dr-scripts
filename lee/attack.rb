@@ -8,7 +8,7 @@ class Attack
     check = dothis(type, DEAD_MATCHES)
     waitrt?
     if killed? check
-      killed_critter
+      @killed = true
     else
       @killed = false
     end
@@ -22,9 +22,5 @@ class Attack
     else
       false
     end
-  end
-
-  def killed_critter
-    @killed = true
   end
 end
