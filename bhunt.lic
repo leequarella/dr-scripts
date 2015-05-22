@@ -29,13 +29,13 @@ while true do
   Expertise.new    unless SkillCheck.locked?("expertise")
 
   unless SkillCheck.locked?("small ed")
-    left = SkillCheck.locked?("offhand")
+    left = !SkillCheck.locked?("offhand")
     WeaponTrainer.new(critter: critter, weapon: "telek", attack_type: "jab", left: left)
     CombatAssessment.new
   end
 
   unless SkillCheck.locked?("large ed")
-    left = SkillCheck.locked?("offhand")
+    left != SkillCheck.locked?("offhand")
     WeaponTrainer.new(critter: critter, weapon: "spath", attack_type: "jab", left: left)
     CombatAssessment.new
   end
