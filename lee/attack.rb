@@ -1,11 +1,10 @@
 class Attack
   attr_accessor :killed
-  DEAD_MATCHES = Regexp.union([/balanced]/, /balance]/, /Roundtime/])
+  DEAD_MATCHES = Regexp.union([/balanced]/, /balance]/, /Roundtime/, /Face what/])
 
-  def initialize(type)
+  def initialize(verb)
     @killed = false
-    CombatAssessment.new
-    check = dothis(type, DEAD_MATCHES)
+    check = dothis(verb, DEAD_MATCHES)
     waitrt?
     if killed? check
       @killed = true
@@ -16,11 +15,11 @@ class Attack
 
   def killed? thing
     if(thing =~ /balance]/)
-      true
+      return true
     elsif(thing =~ /balanced]/)
-      true
+      return true
     else
-      false
+      return false
     end
   end
 end

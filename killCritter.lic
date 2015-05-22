@@ -15,7 +15,7 @@ class KillCritter
     if result == true
       killed_critter
     else
-      attack @attack_type
+      attack_until_dead
     end
   end
 

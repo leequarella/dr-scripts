@@ -1,8 +1,34 @@
-require_relative "scripts/lee/tactics.rb"
-require_relative "scripts/lee/skill_check.rb"
+load "scripts/lee/skill_check.rb"
+load "scripts/lee/combat_assessment.rb"
+load "scripts/lee/loot.rb"
+load "scripts/lee/skin.rb"
+load "scripts/lee/attack.rb"
 
+load "scripts/lee/tactics.rb"
+load "scripts/lee/debilitation.rb"
+load "scripts/lee/warding.rb"
+load "scripts/lee/augmentation.rb"
+load "scripts/lee/appraisal.rb"
+load "scripts/lee/perception.rb"
+load "scripts/lee/expertise.rb"
+load "scripts/lee/weapon_trainer.rb"
+
+critter = script.vars[1]
 while true do
-  unless SkillCheck.new("tactics").locked
-    Tactics.new
-  end
+  CombatAssessment.new
+  Tactics.new      unless SkillCheck.new("tactics").locked
+  Debilitation.new unless SkillCheck.new("debilitation").locked
+  Warding.new      unless SkillCheck.new("warding").locked
+  Augmentation.new unless SkillCheck.new("augmentation").locked
+  Appraisal.new    unless SkillCheck.new("appraisal").locked
+  Perception.new   unless SkillCheck.new("perception").locked
+  Expertise.new    unless SkillCheck.new("expertise").locked
+
+  WeaponTrainer.new(critter, "telek", left: true)
+  CombatAssessment.new
+  WeaponTrainer.new(critter, "spath", left: true)
+  CombatAssessment.new
+  WeaponTrainer.new(critter, "brawling")
+  CombatAssessment.new
+  WeaponTrainer.new(critter, "boko" )
 end
