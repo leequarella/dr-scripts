@@ -13,10 +13,13 @@ load "scripts/lee/perception.rb"
 load "scripts/lee/expertise.rb"
 load "scripts/lee/weapon_trainer.rb"
 
-critter = script.vars[1]
+fput 'stow left in pack'
+fput 'stow right in pack'
 
-fput 'stow left'
-fput 'stow right'
+small_edged = {skill: "small edge",  weapon: "telek",  attack_type: "jab", left: true}
+large_edged = {skill: "large edge",  weapon: "spatha", attack_type: "jab", left: true}
+small_blunt = {skill: "small blunt", weapon: "boko",   attack_type: "bash"}
+WEAPONS = [small_edged, large_edged, small_blunt]
 
 while true do
   CombatAssessment.new
@@ -28,24 +31,19 @@ while true do
   Perception.new   unless SkillCheck.locked?("perception")
   Expertise.new    unless SkillCheck.locked?("expertise")
 
-  unless SkillCheck.locked?("small ed")
-    left = !SkillCheck.locked?("offhand")
-    WeaponTrainer.new(critter: critter, weapon: "telek", attack_type: "jab", left: left)
-    CombatAssessment.new
-  end
-
-  unless SkillCheck.locked?("large ed")
-    left != SkillCheck.locked?("offhand")
-    WeaponTrainer.new(critter: critter, weapon: "spath", attack_type: "jab", left: left)
-    CombatAssessment.new
+  WEAPONS.each do |weap|
+    unless SkillCheck.locked?(weap[:skill])
+      WeaponTrainer.new({
+        weapon:      weap[:weapon],
+        attack_type: weap[:attack_type],
+        left:        weap[:left] && !SkillCheck.locked?("offhand")
+      })
+      CombatAssessment.new
+    end
   end
 
   unless SkillCheck.locked?("brawl")
-    WeaponTrainer.new(critter: critter, attack_type: "punch")
+    WeaponTrainer.new(attack_type: "punch")
     CombatAssessment.new
-  end
-
-  unless SkillCheck.locked?("small blu")
-    WeaponTrainer.new(critter: critter, weapon: "boko", attack_type: "feint")
   end
 end

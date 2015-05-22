@@ -1,14 +1,10 @@
 class Loot
-  def initialize(critter)
-    loot critter
-  end
-
-  def loot critter
+  def initialize
     fput "loot"
     (0..4).each do
       fput "get coin"
-      fput "stow gem"
-      fput "stow box"
+      fput "stow gem in black pou"
+      fput "stow box in pack"
     end
   end
 end

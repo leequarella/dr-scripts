@@ -1,10 +1,8 @@
 class WeaponTrainer
-  WEAPONS = ["Telek", "Spatha"]
   def initialize(data)
     @attack_type = data[:attack_type]
     @weapon      = data[:weapon]
     @left        = data[:left]
-    @critter     = data[:critter] || "Sprite"
 
     prep @weapon if @weapon
     4.times do
@@ -29,8 +27,8 @@ class WeaponTrainer
   end
 
   def killed_critter
-    fput "************************ Killed #{@critter} **************************"
+    fput "************************ Killed Critter **************************"
     Skin.new
-    Loot.new(@critter)
+    Loot.new
   end
 end
