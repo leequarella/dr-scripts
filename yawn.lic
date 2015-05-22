@@ -4,17 +4,17 @@ load "scripts/lee/alchemy.rb"
 load "scripts/lee/performance.rb"
 
 while true do
-  while !SkillCheck.new("outdoorsmanship").locked
+  while !SkillCheck.locked?("outdoorsmanship")
     Outdoorsmanship.new("rock")
   end
   fput "************************Locked Outdoorsmanship*****************************"
 
-  while !SkillCheck.new("alchemy").locked
+  while !SkillCheck.locked?("alchemy")
     Alchemy.new
   end
   fput "************************Locked Alchemy*****************************"
 
-  while !SkillCheck.new("performance").locked
+  while !SkillCheck.locked?("performance")
     Performance.new
   end
   fput "************************Locked Alchemy*****************************"

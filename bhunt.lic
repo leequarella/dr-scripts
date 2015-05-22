@@ -20,32 +20,32 @@ fput 'stow right'
 
 while true do
   CombatAssessment.new
-  Tactics.new      unless SkillCheck.new("tactics").locked
-  Debilitation.new unless SkillCheck.new("debilitation").locked
-  Warding.new      unless SkillCheck.new("warding").locked
-  Augmentation.new unless SkillCheck.new("augmentation").locked
-  Appraisal.new    unless SkillCheck.new("appraisal").locked
-  Perception.new   unless SkillCheck.new("perception").locked
-  Expertise.new    unless SkillCheck.new("expertise").locked
+  Tactics.new      unless SkillCheck.locked?("tactics")
+  Debilitation.new unless SkillCheck.locked?("debilitation")
+  Warding.new      unless SkillCheck.locked?("warding")
+  Augmentation.new unless SkillCheck.locked?("augmentation")
+  Appraisal.new    unless SkillCheck.locked?("appraisal")
+  Perception.new   unless SkillCheck.locked?("perception")
+  Expertise.new    unless SkillCheck.locked?("expertise")
 
-  unless SkillCheck.new("small ed").locked
-    left = SkillCheck.new("offhand").locked
+  unless SkillCheck.locked?("small ed")
+    left = SkillCheck.locked?("offhand")
     WeaponTrainer.new(critter: critter, weapon: "telek", attack_type: "jab", left: left)
     CombatAssessment.new
   end
 
-  unless SkillCheck.new("large ed").locked
-    left = SkillCheck.new("offhand").locked
+  unless SkillCheck.locked?("large ed")
+    left = SkillCheck.locked?("offhand")
     WeaponTrainer.new(critter: critter, weapon: "spath", attack_type: "jab", left: left)
     CombatAssessment.new
   end
 
-  unless SkillCheck.new("brawl").locked
+  unless SkillCheck.locked?("brawl")
     WeaponTrainer.new(critter: critter, attack_type: "punch")
     CombatAssessment.new
   end
 
-  unless SkillCheck.new("small blu").locked
+  unless SkillCheck.locked?("small blu")
     WeaponTrainer.new(critter: critter, weapon: "boko", attack_type: "feint")
   end
 end
