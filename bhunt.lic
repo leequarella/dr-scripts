@@ -14,6 +14,10 @@ load "scripts/lee/expertise.rb"
 load "scripts/lee/weapon_trainer.rb"
 
 critter = script.vars[1]
+
+fput 'stow left'
+fput 'stow right'
+
 while true do
   CombatAssessment.new
   Tactics.new      unless SkillCheck.new("tactics").locked
@@ -24,11 +28,24 @@ while true do
   Perception.new   unless SkillCheck.new("perception").locked
   Expertise.new    unless SkillCheck.new("expertise").locked
 
-  WeaponTrainer.new(critter, "telek", left: true)
-  CombatAssessment.new
-  WeaponTrainer.new(critter, "spath", left: true)
-  CombatAssessment.new
-  WeaponTrainer.new(critter, "brawling")
-  CombatAssessment.new
-  WeaponTrainer.new(critter, "boko" )
+  unless SkillCheck.new("small ed").locked
+    left = SkillCheck.new("offhand").locked
+    WeaponTrainer.new(critter: critter, weapon: "telek", attack_type: "jab", left: left)
+    CombatAssessment.new
+  end
+
+  unless SkillCheck.new("large ed").locked
+    left = SkillCheck.new("offhand").locked
+    WeaponTrainer.new(critter: critter, weapon: "spath", attack_type: "jab", left: left)
+    CombatAssessment.new
+  end
+
+  unless SkillCheck.new("brawl").locked
+    WeaponTrainer.new(critter: critter, attack_type: "punch")
+    CombatAssessment.new
+  end
+
+  unless SkillCheck.new("small blu").locked
+    WeaponTrainer.new(critter: critter, weapon: "boko", attack_type: "feint")
+  end
 end

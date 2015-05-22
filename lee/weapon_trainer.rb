@@ -1,19 +1,14 @@
 class WeaponTrainer
   WEAPONS = ["Telek", "Spatha"]
-  def initialize(critter="sprite", weapon=nil, left=nil)
-    @weapon  = weapon
-    @left    = left
-    @critter = critter
-    fput 'stow left'
-    fput 'stow right'
+  def initialize(data)
+    @attack_type = data[:attack_type]
+    @weapon      = data[:weapon]
+    @left        = data[:left]
+    @critter     = data[:critter] || "Sprite"
 
-    prep weapon unless weapon == "brawling"
+    prep @weapon if @weapon
     4.times do
-      if weapon == "brawling"
-        attack "punch"
-      else
-        attack("jab left")
-      end
+      attack(@attack_type)
       pause 1
       waitrt?
     end
@@ -21,21 +16,16 @@ class WeaponTrainer
   end
 
   def prep(weapon)
-    empty_hands
     fput "wield #{weapon}"
     fput "swap" if @left
   end
 
   def attack(type)
-    dead = Attack.new(type).killed
+    verb = "#{type} #{'left' if @left}"
+    dead = Attack.new(verb).killed
     pause 1
     waitrt?
     killed_critter if dead
-  end
-
-  def empty_hands
-    fput "she left"
-    fput "she right"
   end
 
   def killed_critter
