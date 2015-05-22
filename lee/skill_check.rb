@@ -1,6 +1,7 @@
 class SkillCheck
+  attr_reader :locked
   def initialize(skill)
-    locked? skill
+    @locked = locked? skill
   end
 
   def locked? skill

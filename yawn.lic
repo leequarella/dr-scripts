@@ -1,0 +1,15 @@
+require_relative "scripts/lee/skill_check.rb"
+load "scripts/lee/outdoorsmanship.rb"
+load "scripts/lee/alchemy.rb"
+
+while true do
+  while !SkillCheck.new("outdoorsmanship").locked
+    Outdoorsmanship.new("rock")
+  end
+  fput "************************Locked Outdoorsmanship*****************************"
+
+  while !SkillCheck.new("alchemy").locked
+    Alchemy.new
+  end
+  fput "************************Locked Alchemy*****************************"
+end

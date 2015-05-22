@@ -1,0 +1,8 @@
+require_relative "scripts/lee/tactics.rb"
+require_relative "scripts/lee/skill_check.rb"
+
+while true do
+  unless SkillCheck.new("tactics").locked
+    Tactics.new
+  end
+end
