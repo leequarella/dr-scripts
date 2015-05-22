@@ -1,0 +1,4 @@
+while true do
+  fput script.vars[0]
+  waitrt?
+end

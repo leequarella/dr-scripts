@@ -1,0 +1,97 @@
+=begin
+
+ANALYZES a creature and performs the necessary
+combat moves to enact the debuff.
+
+written by: Zadrix
+
+=end
+
+no_kill_all
+no_pause_all
+silence_me
+
+analyze:
+pause 1
+fput "analyze"
+match "parseline", "Your analysis reveals"
+match "parseline", "You reveal"
+match "analyze", "You must be closer to use tactical abilities"
+match "pause6", "Analyze what"
+match "analyze", "You fail to find"
+match "pause6", "There is nothing else to face"
+matchwait
+
+pause6:
+pause 6
+fput "face next"
+goto "analyze"
+
+parseline:
+pause 3
+
+line = get
+match = line.match(/by landing (.*)/)[1]
+
+unless match.nil?
+   my_arr = match.split(' ')
+   
+   my_arr.each { |action|
+      #puts "Action is: #{action}."
+      if action.include? 'claw'
+         fput "claw"
+         pause 4
+      elsif action.include? 'gouge'
+         fput "gouge"
+         pause 4
+      elsif action.include? 'punch'
+         fput "punch"
+         pause 4
+      elsif action.include? 'elbow'
+         fput "elbow"
+         pause 4
+      elsif action.include? 'kick'
+         fput "kick"
+         pause 4
+      elsif action.include? 'slap'
+         fput "slap"
+         pause 4
+      elsif action.include? 'feint'
+         fput "feint"
+         pause 7
+      elsif action.include? 'jab'
+         fput "jab"
+         pause 7
+      elsif action.include? 'draw'
+         fput "draw"
+         pause 7
+      elsif action.include? 'slice'
+         fput "slice"
+         pause 7
+      elsif action.include? 'thrust'
+         fput "thrust"
+         pause 7
+      elsif action.include? 'chop'
+         fput "chop"
+         pause 7
+      elsif action.include? 'sweep'
+         fput "sweep"
+         pause 7
+      elsif action.include? 'lunge'
+         fput "lunge"
+         pause 7
+      else
+      end
+   }
+   goto "expcheck"
+end
+
+# Check tactics mind locked #
+expcheck:
+   fput "exp tactics"
+   match "done", "mind lock"
+   match "analyze", "EXP HELP"
+   matchwait
+
+done:
+   return

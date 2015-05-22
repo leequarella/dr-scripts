@@ -1,0 +1,27 @@
+require_relative "scripts/lee/loot.rb"
+require_relative "scripts/lee/attack.rb"
+require_relative "scripts/lee/combat_assessment.rb"
+
+class Kill
+  def initialize(critter, attack_type)
+    @critter     = critter
+    @attack_type = attack_type
+    attack_until_dead
+  end
+
+  def attack_until_dead
+    result = Attack.new(@attack_type).killed
+    waitrt?
+    if result == true
+      killed_critter
+    else
+      attack @attack_type
+    end
+  end
+
+  def killed_critter
+    Loot.new(@critter)
+  end
+end
+
+Kill.new script.vars[1], script.vars[2..-1].join(" ")
