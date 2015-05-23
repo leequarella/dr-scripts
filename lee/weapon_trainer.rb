@@ -10,7 +10,7 @@ class WeaponTrainer
       pause 1
       waitrt?
     end
-    fput "she #{@weapon}"
+    fput "she #{@weapon}" if @weapon
   end
 
   def prep(weapon)

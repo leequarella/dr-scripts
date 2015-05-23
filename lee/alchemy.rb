@@ -15,8 +15,9 @@ class Alchemy
   end
 
   def empty_mortar
-    fput "get flow from my mortar"
-    fput "put my flow in bucket"
+    fput "tilt my mortar"
+    fput "tilt my mortar"
+    waitrt?
   end
 
   def fill_mortar

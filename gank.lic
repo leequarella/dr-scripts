@@ -1,0 +1,28 @@
+load "scripts/lee/loot.rb"
+load "scripts/lee/skin.rb"
+load "scripts/lee/attack.rb"
+load "scripts/lee/combat_assessment.rb"
+
+class KillCritter
+  def initialize(attack_type="jab")
+    @attack_type = attack_type
+    attack_until_dead
+  end
+
+  def attack_until_dead
+    result = Attack.new(@attack_type).killed
+    waitrt?
+    if result == true
+      killed_critter
+    else
+      attack_until_dead
+    end
+  end
+
+  def killed_critter
+    Skin.new
+    Loot.new
+  end
+end
+
+KillCritter.new script.vars[0]
