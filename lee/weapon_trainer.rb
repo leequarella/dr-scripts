@@ -5,7 +5,7 @@ class WeaponTrainer
     @left        = data[:left]
 
     prep @weapon if @weapon
-    4.times do
+    5.times do
       attack(@attack_type)
       pause 1
       waitrt?
