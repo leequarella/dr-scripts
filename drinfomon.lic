@@ -388,7 +388,7 @@ while line = script.gets
 		#you deposited all your money
 			fput "balance"
 		elsif line =~ /^The clerk counts out ([0-9]+) (platinum|gold|silver|bronze|copper) (?:Kronars|Lirums|Dokoras) and hands them over, making a notation in her ledger\./
-		#you withdrew some money		
+		#you withdrew some money
 			for town,titles in bank_titles
 				if titles.include?(checkroom)
 					CharSettings['bank_accounts'][town] = CharSettings['bank_accounts'][town].to_i - $1.to_i
@@ -396,7 +396,7 @@ while line = script.gets
 				end
 			end
 		elsif line =~ /^The clerk counts out all your (?:Kronars|Lirums|Dokoras) and hands them over, making a notation in her ledger\./
-		#you withdrew all your money	
+		#you withdrew all your money
 			for town,titles in bank_titles
 				if titles.include?(checkroom)
 					CharSettings['bank_accounts'][town] = 0
@@ -406,7 +406,7 @@ while line = script.gets
 		elsif line =~ /[it looks like|\"Here we are.]\s[y]our current balance is (.*)\s(?:Kronars|Lirums|Dokoras)\.\"/i
 		#you checked your balance
 			copper = 0
-			$1.each(', ') {|m| 
+			$1.split(', ') {|m|
 				m.to_s
 				a = m.match(/([0-9]+).[a-z]+/)
 				copper = copper + convert2copper(a.to_s.to_i,m)
@@ -418,7 +418,7 @@ while line = script.gets
 				end
 			end
 		elsif line =~ /you do not seem to have an account with us/
-		#you have no account	
+		#you have no account
 			for town,titles in bank_titles
 				if titles.include?(checkroom)
 					CharSettings['bank_accounts'][town] = 0
