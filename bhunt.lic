@@ -21,13 +21,15 @@ large_edged = {skill: "large edge",  weapon: "spatha", attack_type: "jab", left:
 small_blunt = {skill: "small blunt", weapon: "boko",   attack_type: "bash"}
 WEAPONS = [small_edged, large_edged, small_blunt]
 
+appr = Appraisal.new
+
 while true do
   CombatAssessment.new
   Tactics.new      unless SkillCheck.locked?("tactics")
   Debilitation.new unless SkillCheck.locked?("debilitation")
   Warding.new      unless SkillCheck.locked?("warding")
   Augmentation.new unless SkillCheck.locked?("augmentation")
-  Appraisal.new    unless SkillCheck.locked?("appraisal")
+  appr.next        unless SkillCheck.locked?("appraisal")
   Perception.new   unless SkillCheck.locked?("perception")
   Expertise.new    unless SkillCheck.locked?("expertise")
 
