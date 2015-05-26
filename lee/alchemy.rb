@@ -22,7 +22,6 @@ class Alchemy
 
   def fill_mortar
     fput "forage blue flower"
-    pause 1
     waitrt?
     fput "put my flower in my mortar"
   end

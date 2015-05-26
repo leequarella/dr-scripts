@@ -25,13 +25,14 @@ appr = Appraisal.new
 
 while true do
   CombatAssessment.new
-  Tactics.new      unless SkillCheck.locked?("tactics")
-  Debilitation.new unless SkillCheck.locked?("debilitation")
-  Warding.new      unless SkillCheck.locked?("warding")
-  Augmentation.new unless SkillCheck.locked?("augmentation")
-  appr.next        unless SkillCheck.locked?("appraisal")
-  Perception.new   unless SkillCheck.locked?("perception")
-  Expertise.new    unless SkillCheck.locked?("expertise")
+  Tactics.new         unless SkillCheck.locked?("tactics")
+  Debilitation.new    unless SkillCheck.locked?("debilitation")
+  Warding.new         unless SkillCheck.locked?("warding")
+  Augmentation.new    unless SkillCheck.locked?("augmentation")
+  appr.next           unless SkillCheck.locked?("appraisal")
+  Perception.new      unless SkillCheck.locked?("perception")
+  Expertise.new       unless SkillCheck.locked?("expertise")
+  #Outdoorsmanship.new unless SkillCheck.locked?("outdoorsmanship")
 
   WEAPONS.each do |weap|
     unless SkillCheck.locked?(weap[:skill])

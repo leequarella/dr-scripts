@@ -1,0 +1,7 @@
+require_relative "scripts/lee/skill_check.rb"
+load "scripts/lee/hide.rb"
+
+  while !SkillCheck.locked?("stealth")
+    Hide.new
+  end
+  fput "************************Locked Mech*****************************"

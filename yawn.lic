@@ -4,7 +4,14 @@ load "scripts/lee/alchemy.rb"
 load "scripts/lee/mech_lore.rb"
 load "scripts/lee/performance.rb"
 
+fput "stow left"
+fput "stow right"
 while true do
+  while !SkillCheck.locked?("mech")
+    MechLore.new
+  end
+  fput "************************Locked Mech*****************************"
+
   while !SkillCheck.locked?("outdoorsmanship")
     Outdoorsmanship.new("rock")
   end
@@ -15,13 +22,14 @@ while true do
   end
   fput "************************Locked Alchemy*****************************"
 
-  #while !SkillCheck.locked?("mech")
-  #  MechLore.new
-  #end
-  #fput "************************Locked Mech*****************************"
+  while !SkillCheck.locked?("performance")
+    Performance.new
+  end
+  fput "************************Locked Performance*****************************"
 
-  #while !SkillCheck.locked?("performance")
-  #  Performance.new
-  #end
-  #fput "************************Locked Performance*****************************"
+  appr = Appraisal.new
+  while !SkillCheck.locked?("appraisal")
+    appr.next
+  end
+  fput "************************Locked Appraisal*****************************"
 end
