@@ -18,13 +18,12 @@ fput 'stow right in pack'
 
 small_edged = {skill: "small edge",  weapon: "telek",  attack_type: "jab", left: true}
 large_edged = {skill: "large edge",  weapon: "spatha", attack_type: "jab", left: true}
-small_blunt = {skill: "small blunt", weapon: "boko",   attack_type: "bash"}
+small_blunt = {skill: "small blunt", weapon: "boko",   attack_type: "swing"}
 WEAPONS = [small_edged, large_edged, small_blunt]
 
 appr = Appraisal.new
 
 while true do
-  CombatAssessment.new
   Tactics.new         unless SkillCheck.locked?("tactics")
   Debilitation.new    unless SkillCheck.locked?("debilitation")
   Warding.new         unless SkillCheck.locked?("warding")
