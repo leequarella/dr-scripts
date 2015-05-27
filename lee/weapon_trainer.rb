@@ -35,7 +35,7 @@ class WeaponTrainer
     Loot.new
   end
 
-  def killed_critter
+  def no_critter
     fput "************************ No critter to attack. **************************"
   end
 end
