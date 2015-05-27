@@ -19,16 +19,23 @@ class WeaponTrainer
   end
 
   def attack(type)
-    verb = "#{type} #{'left' if @left}"
-    dead = Attack.new(verb).killed
+    verb   = "#{type} #{'left' if @left}"
+    attack = Attack.new(verb)
+    dead        = attack.killed
+    no_critters = attack.no_critters
     pause 1
     waitrt?
     killed_critter if dead
+    no_critter if no_critters
   end
 
   def killed_critter
     fput "************************ Killed Critter **************************"
     Skin.new
     Loot.new
+  end
+
+  def killed_critter
+    fput "************************ No critter to attack. **************************"
   end
 end
