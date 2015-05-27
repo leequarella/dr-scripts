@@ -3,6 +3,7 @@ load "scripts/lee/outdoorsmanship.rb"
 load "scripts/lee/alchemy.rb"
 load "scripts/lee/mech_lore.rb"
 load "scripts/lee/performance.rb"
+load "scripts/lee/juggle.rb"
 
 fput "stow left"
 fput "stow right"
@@ -24,6 +25,11 @@ while true do
 
   while !SkillCheck.locked?("performance")
     Performance.new
+  end
+  fput "************************Locked Performance*****************************"
+
+  while !SkillCheck.locked?("perception")
+    Juggle.new "acorn"
   end
   fput "************************Locked Performance*****************************"
 
