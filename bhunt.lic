@@ -32,7 +32,6 @@ while true do
   appr.next           unless SkillCheck.locked?("appraisal")
   Perception.new      unless SkillCheck.locked?("perception")
   Expertise.new       unless SkillCheck.locked?("expertise")
-  #Outdoorsmanship.new unless SkillCheck.locked?("outdoorsmanship")
 
   WEAPONS.each do |weap|
     unless SkillCheck.locked?(weap[:skill])
