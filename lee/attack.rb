@@ -1,6 +1,7 @@
 class Attack
   attr_accessor :killed
-  DEAD_MATCHES = Regexp.union([/balanced]/, /balance]/, /Roundtime/, /Face what/, /There is nothing else to face/])
+  DEAD_MATCHES = Regexp.union([/balanced]/, /balance]/, /Roundtime/, /Face what/, /There is nothing else to face/,
+  /You aren't close enough to attack/])
 
   def initialize(verb)
     @killed = false
@@ -19,6 +20,8 @@ class Attack
     elsif(thing =~ /balanced]/)
       return true
     elsif(thing =~ /There is nothing else to face/)
+      return true
+    elsif(thing =~ /You aren't close enough to attack/)
       return true
     else
       return false
