@@ -24,7 +24,6 @@ WEAPONS = [small_edged, large_edged, small_blunt]
 appr = Appraisal.new
 
 while true do
-  CombatAssessment.new
   Tactics.new         unless SkillCheck.locked?("tactics")
   Debilitation.new    unless SkillCheck.locked?("debilitation")
   Warding.new         unless SkillCheck.locked?("warding")
