@@ -5,6 +5,6 @@ class Juggle
     fput "get my #{item}"
     fput "juggle my #{item}"
     waitrt?
-    fput "put my #{item} in robe"
+    fput "put my #{item} in my robe"
   end
 end

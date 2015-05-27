@@ -25,4 +25,6 @@ class KillCritter
   end
 end
 
-KillCritter.new script.vars[0]
+while true do
+  KillCritter.new script.vars[0]
+end
