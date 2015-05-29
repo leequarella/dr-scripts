@@ -1,0 +1,14 @@
+if  script.vars[1] == "out"
+  fput "close vault"
+  fput "go door"
+  fput "go arch"
+  fput "o"
+  fput "o"
+else
+  fput "go squa"
+  fput "go door"
+  fput "go arch"
+  fput "pull lev"
+  fput "go door"
+  fput ""
+end
