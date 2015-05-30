@@ -1,0 +1,50 @@
+load "scripts/lee/identify_trap.rb"
+load "scripts/lee/disarm.rb"
+load "scripts/lee/identify_lock.rb"
+load "scripts/lee/pick.rb"
+load "scripts/lee/empty_box.rb"
+
+box = script.vars[1]
+
+armor = ["glo", "leath", "targ", "bala"]
+
+#fput "stow right"
+#fput "stow left"
+#armor.each do |a|
+#  fput "rem #{a}"
+#  fput "stow"
+#  fput "stow left"
+#end
+
+fput "get my #{box}"
+
+trap_identity = IdentifyTrap.new(box)
+
+unless trap_identity.disarmed
+  dis = Disarm.new(box, trap_identity.difficulty)
+  while dis.more_traps && !(dis.disarmed || dis.sprung)
+    dis = Disarm.new(box, trap_identity.difficulty)
+  end
+  if dis.sprung
+    fput "*********************** Sprung the trap! ****************************************"
+  end
+end
+
+lock_identity = IdentifyLock.new(box)
+
+unless lock_identity.picked
+  pick = Pick.new(box, lock_identity.difficulty)
+  while pick.more_locks && !pick.picked
+    pick = Pick.new(box, lock_identity.difficulty)
+  end
+end
+
+fput "*********************** Box has been popped! ****************************************"
+
+EmptyBox.new(box)
+
+
+#armor.each do |a|
+#  fput "get my #{a}"
+#  fput "wear my #{a}"
+#end

@@ -10,5 +10,5 @@ else
   fput "go arch"
   fput "pull lev"
   fput "go door"
-  fput ""
+  fput "open vault"
 end

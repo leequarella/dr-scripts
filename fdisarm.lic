@@ -1,0 +1,617 @@
+#.disarm %1 = box %2 = lockpick storage %3 = harvest item storage,
+
+goto DISID
+
+ARMOR:
+
+            MATCH DISID You are wearing nothing of that sort.
+            MATCH DISID You have nothing of that sort.
+            MATCH REMARM You are wearing 
+            PUT INV ARMOR
+            MATCHWAIT
+
+REMARM:
+
+            ECHO *** You are still wearing armor!
+            ECHO *** Type 'YES' to continue, 'DONE' to quit
+            MATCH DISID positive attitude
+            MATCH DONE Please rephrase that command.
+            MATCHWAIT
+
+PDISID:
+
+            PAUSE
+
+DISID:
+
+            MATCH PDISID ...wait
+            MATCH DISID fails to reveal to you what type of trap protects it
+            MATCH DISID something to shift
+            MATCH DISCARE would be a longshot
+            MATCH DISHARD You have an amazingly minimal chance
+            MATCH DISHARD You really don't have any chance
+            MATCH DISCARE Prayer would be a good start for any
+            MATCH DISHARD You could just jump off a cliff and save
+            MATCH DISHARD You probably have the same shot as a snowball
+            MATCH DISHARD A pitiful snowball encased in the Flames
+            MATCH DISCARE covered black scarab of some unidentifiable substance clings to the
+            MATCH DISCARE are covered with a thin metal circle that has been lacquered with
+            MATCH DISQUICK trivially constructed gadget which you can take down any time
+            MATCH DISQUICK This trap is a laughable matter, you could do it blindfolded
+            MATCH DISQUICK An aged grandmother could defeat this trap in her sleep
+            MATCH DISNORM will be a simple matter for you to disarm
+            MATCH DISNORM You think this trap is precisely at your skill level
+            MATCH DISCARE with only minor troubles
+            MATCH DISCARE should not take long with your skills
+            MATCH DISCARE trap has the edge on you, but you've got a good shot at disarming
+            MATCH DISCARE You have some chance of being able to disarm
+            MATCH DISCARE odds are against you
+            MATCH UNKDIS Roundtime
+
+            PUT DISARM MY %1 IDENTIFY
+
+            MATCHWAIT 
+
+DISHARD:
+
+            ECHO *** Too Hard to Disarm!
+            GOTO DONE
+
+UNKDIS:
+
+            ECHO *** Unknown Trap Difficulty -- using CAREFUL!
+
+DISCARE:
+
+            SAVE CAREFUL
+            GOTO DISARM
+
+DISNORM:
+
+            SAVE ""
+            GOTO DISARM
+
+DISQUICK:
+
+            SAVE "QUICK"
+            GOTO DISARM
+
+PDISARM:
+
+            PAUSE
+
+DISARM:
+
+            MATCH PDISARM ...wait
+            MATCH DISID not yet fully disarmed.
+            MATCH DISID proves too difficult to manipulate
+            MATCH DISCARE something to shift
+            MATCH DISFAIL lock springs out and stabs you painfully in the finger.
+            MATCH DISFAIL An acrid stream of sulfurous air hisses quietly
+            MATCH DISFAIL A stream of corrosive acid sprays out from the
+            MATCH DISFAIL With a sinister swishing noise, a deadly sharp scythe blade whips out the front of the
+            MATCH DISFAIL There is a sudden flash of greenish light, and a huge electrical charge sends you flying
+            MATCH DISFAIL A stoppered vial opens with a pop and cloud of thick green vapor begins to pour out of the
+            MATCH DISFAIL breaks in half. A glass sphere on the seal begins to glow with an eerie black light
+            MATCH DISFAIL Just as your ears register the sound of a sharp snap
+            MATCH DISFAIL Looking at the needle, you notice with horror the rust colored coating on the tip.
+            MATCH DISFAIL You barely have time to register a faint click before a blinding flash explodes around you
+            MATCH DISFAIL Moving with the grace of a pregnant goat, you carelessly flick at the piece of metal causing
+            MATCH DISFAIL You make a small hole in the side of the box and take deep breath to blow the powder free but a 
+            MATCH DISFAIL With a cautious hand, you attempt to undo the string tying the bladder to the locking mechanism 
+            MATCH DISFAIL The dart flies though your fingers and plants itself solidly in your forehead!
+            MATCH DISFAIL Almost casually, you press on the tiny hammer set to break the tube. The hammer slips from its locked
+            MATCH DISFAIL Nothing happened. Maybe it was a dud.
+            MATCH DISFAIL You get a feeling that something isn't right. Before you have time to think what it might be you find...
+            MATCH DISFAIL and emits a sound like tormented souls being freed, then fades away suddenly.
+            MATCH DISFAIL has gotten much bigger!
+            MATCH DISFAIL and clumsily shred the fatty bladder behind it in the process.
+            MATCH DISFAIL "liquid shadows"
+            MATCH DISFAIL You wiggle the milky-white tube back and forth for a few moments in an attempt to remove it from
+            MATCH DISFAIL With a nasty look and a liberal amount of hurled, unladylike epithets, she wiggles back inside and slams
+            MATCH DISFAIL Not sure where to start, you begin by prying off the body of the crusty scarab, hoping to break it free
+            MATCH DISFAIL You feel like you've done a good job of blocking up the pinholes, until you peer closely to examine 
+            MATCH DISARM You work with the trap for a while but are unable to make any progress.
+            MATCH DISNEXT Roundtime
+
+            PUT DISARM MY %1 %s
+
+            MATCHWAIT
+
+DISMORE:
+
+            SAVE DISID
+            GOTO DISANAL
+
+DISNEXT:
+
+            SAVE PICK
+            GOTO PICKID
+
+DISFAIL:
+
+            GOTO DONE 
+
+PDISANAL:
+
+            PAUSE
+
+DISANAL:
+
+            MATCH PDISANAL ...wait
+            MATCH DISHARV You've already analyzed
+            MATCH DISANAL You are unable to determine a proper method
+            MATCH DISHARV Roundtime
+
+            PUT DISARM MY %1 ANAL
+
+            MATCHWAIT
+
+PDISHARV:
+
+            PAUSE
+
+DISHARV:
+
+            MATCH PDISHARV ...wait
+            MATCH DISHARV You fumble around with the trap apparatus
+            MATCH %s much for it to be successfully harvested.
+            MATCH %s completely unsuitable for harvesting.
+            MATCH CLRLFT previous trap have already been completely harvested.
+            MATCH CLRLFT Roundtime
+
+            PUT DISARM MY %1 HARV
+
+            MATCHWAIT
+
+PCLRLFT:
+
+            PAUSE
+
+CLRLFT:
+
+            MATCH PCLRLFT ...wait
+            MATCH LEG leg in your left hand
+            MATCH FACE face in your left hand
+            MATCH SEAL seal in your left hand
+            MATCH CRYSTAL crystal in your left hand
+            MATCH TUBE tube in your left hand
+            MATCH RUNE rune in your left hand
+            MATCH NEEDLE needle in your left hand
+            MATCH RESERVOIR reservoir in your left hand
+            MATCH STRIKER striker in your left hand
+            MATCH BLADE blade in your left hand
+            MATCH SPRING spring in your left hand
+            MATCH CUBE cube in your left hand
+            MATCH STUDS studs in your left hand
+            MATCH DISC disc in your left hand
+            MATCH VIAL vial in your left hand
+            MATCH PIN pin in your left hand
+            MATCH HAMMER hammer in your left hand
+            MATCH %s nothing in your left hand.
+            MATCH STOWIT in your left hand.
+
+            PUT GLANCE
+
+            MATCHWAIT
+
+ 
+
+LEG:
+
+#Legs have good pawn value, so save them.
+
+            IF_3 PUT PUT LEG IN %3
+            IF_3 GOTO %s
+
+            PUT DROP LEG
+
+            GOTO %s
+
+FACE:
+
+            IF_3 PUT PUT FACE IN %3
+            IF_3 GOTO %s
+
+            PUT DROP FACE
+
+            GOTO %s
+
+SEAL:
+
+            IF_3 PUT PUT SEAL IN %3
+            IF_3 GOTO %s
+
+            PUT DROP SEAL
+
+            GOTO %s
+
+CRYSTAL:
+
+            IF_3 PUT PUT CRYSTAL IN %3
+            IF_3 GOTO %s
+
+            PUT DROP CRYSTAL
+
+            GOTO %s
+
+TUBE:
+
+            IF_3 PUT PUT TUBE IN %3
+            IF_3 GOTO %s
+
+            PUT DROP TUBE
+
+            GOTO %s
+
+RUNE:
+
+            IF_3 PUT PUT RUNE IN %3
+            IF_3 GOTO %s
+
+            PUT DROP RUNE
+
+            GOTO %s
+
+NEEDLE:
+
+#Needles have good pawn value, so save them.
+
+            IF_3 PUT PUT NEEDLE IN %3
+            IF_3 GOTO %s
+
+            PUT DROP NEEDLE
+
+            GOTO %s
+
+RESERVOIR:
+
+            IF_3 PUT PUT RESERVOIR IN %3
+            IF_3 GOTO %s
+
+            PUT DROP RESERVOIR
+
+            GOTO %s
+
+STRIKER:
+
+            IF_3 PUT PUT STRIKER IN %3
+            IF_3 GOTO %s
+
+            PUT DROP STRIKER
+
+            GOTO %s
+
+BLADE:
+
+            IF_3 PUT PUT BLADE IN %3
+            IF_3 GOTO %s
+
+            PUT DROP BLADE
+
+            GOTO %s
+
+SPRING:
+
+#Springs have good pawn value, so save them.
+
+            IF_3 PUT PUT SPRING IN %3
+            IF_3 GOTO %s
+
+            PUT DROP SPRING
+
+            GOTO %s
+
+CUBE:
+
+            IF_3 PUT PUT CUBE IN %3
+            IF_3 GOTO %s
+
+            PUT DROP CUBE
+
+            GOTO %s
+
+STUDS:
+
+            IF_3 PUT PUT STUDS IN %3
+            IF_3 GOTO %s
+
+            PUT DROP STUDS
+
+            GOTO %s
+
+DISC:
+
+            #DISCS have good pawn value, so save them.
+
+            IF_3 PUT PUT DISC IN %3
+            IF_3 GOTO %s
+
+            PUT DROP DISC
+
+            GOTO %s
+
+VIAL:
+
+            IF_3 PUT PUT VIAL IN %3
+            IF_3 GOTO %s
+
+            PUT DROP VIAL
+
+            GOTO %s
+
+PIN:
+
+            IF_3 PUT PUT PIN IN %3
+            IF_3 GOTO %s
+
+            PUT DROP PIN
+
+            GOTO %s
+
+HAMMER:
+
+            IF_3 PUT PUT HAMMER IN %3
+            IF_3 GOTO %s
+
+            PUT DROP HAMMER
+
+            GOTO %s
+
+STOWIT:
+
+            PUT STOW LEFT
+
+            GOTO %s
+ 
+
+PPICK:
+
+            PAUSE
+
+PICK:
+
+            MATCH PPICK ...wait
+            MATCH CLRLFT You need a free hand to pick that up.
+            MATCH PICKID you get a
+            MATCH NOPICK referring to?
+
+            IF_2 PUT GET MY LOCKP FROM MY %2
+
+            IF_2 MATCHWAIT
+
+            MATCHWAIT
+ 
+NOPICK:
+
+            ECHO *** No more lockpicks, or try a different container.  
+            GOTO DONE 
+
+PPICKID:
+
+            PAUSE
+
+PICKID:
+
+            MATCH PPICKID ...wait
+            MATCH BROKEID Find a more appropriate tool and try again!
+            MATCH OPENBOX It's not even locked, why bother?
+            MATCH PICKID fails to teach you anything about the lock guarding it.
+            MATCH PICKBLIND trivially constructed gadget which you can take down any time
+            MATCH PICKBLIND An aged grandmother could
+            MATCH PICKBLIND you could do it blindfolded
+            MATCH PICKQUICK trivially constructed piece of junk barely worth your time
+            MATCH PICKQUICK will be a simple matter for you to unlock
+            MATCH PICKQUICK should not take long with your skills
+            MATCH PICKQUICK You think this lock is precisely at your skill level
+            MATCH PICKQUICK with only minor troubles
+            MATCH PICKCARE lock has the edge on you, but you've got a good shot at
+            MATCH PICKCARE You have some chance of being able to
+            MATCH PICKCARE odds are against you
+            MATCH PICKCARE would be a longshot
+            MATCH PICKCARE You have an amazingly minimal chance
+            MATCH PICKHARD You really don't have any chance
+            MATCH PICKCARE Prayer would be a good start for any
+            MATCH PICKHARD You could just jump off a cliff and save
+            MATCH PICKHARD You probably have the same shot as a snowball
+            MATCH PICKHARD A pitiful snowball encased in the Flames
+            MATCH UNKPICK Roundtime
+
+            PUT PICK MY %1 ID
+
+            MATCHWAIT
+
+PBROKEID:
+
+            PAUSE
+
+BROKEID:
+
+            MATCH PBROKEID ...wait
+            MATCH PICKID you get a
+            MATCH NOPICK referring to?
+
+            IF_2 PUT GET MY LOCKP FROM MY %2
+
+            IF_2 MATCHWAIT
+
+            PUT GET LOCKP 
+
+            MATCHWAIT
+
+PICKHARD:
+
+            ECHO *** You have no chance to open this lock!
+            ECHO *** Proceeding to Pick Quick Anyway
+
+            GOTO PICKQUICK
+
+PICKCARE:
+
+            IF_4 SAVE ""
+            IF_4 GOTO PICKANAL
+
+            SAVE CAREFUL
+            GOTO PICKANAL
+
+UNKPICK:
+
+            ECHO *** Unknown Lock Difficulty -- using normal.
+
+PICKNORM:
+
+            IF_4 SAVE QUICK
+            IF_4 GOTO PICKANAL
+
+            SAVE ""
+
+            GOTO PICKANAL
+
+PICKQUICK:
+
+            IF_4 SAVE BLIND
+            IF_4 GOTO PICKANAL
+
+            SAVE QUICK
+
+            GOTO PICKANAL
+
+PICKBLIND:
+
+            SAVE BLIND
+            GOTO PICKANAL
+
+PPICKANAL:
+
+            PAUSE
+
+PICKANAL:
+
+            MATCH PPICKANAL ...wait
+            MATCH PICKANAL You are unable to determine anything useful about the lock
+            MATCH PICKLOCK This lock has already helpfully been analyzed...
+            MATCH PICKLOCK Roundtime
+
+            PUT PICK MY %1 ANAL
+
+            matchwait
+
+PPICKLOCK:
+
+            PAUSE
+
+PICKLOCK:
+
+            MATCH PPICKLOCK ...wait
+            MATCH PICKLOCK You are unable to make any progress towards opening the lock.
+            MATCH BROKE just broke
+            MATCH BROKE Find a more appropriate tool and try again!
+            MATCH PICKID You discover another
+            MATCH OPENBOX Roundtime
+
+            PUT PICK MY %1 %s
+
+            MATCHWAIT
+
+ 
+
+PBROKE:
+
+            PAUSE
+
+BROKE:
+
+            MATCH PBROKE ...wait
+            MATCH PICKLOCK you get a
+            MATCH NOPICK referring to?
+
+            IF_2 PUT GET MY LOCKP FROM MY %2
+            IF_2 MATCHWAIT
+
+            PUT GET LOCKP 
+
+            MATCHWAIT
+
+POPENBOX:
+
+            PAUSE
+
+OPENBOX:
+
+            MATCH POPENBOX ...wait
+            MATCH STRONGBOX strongbox in your right hand
+            MATCH CADDY caddy in your right hand
+            MATCH CASKET casket in your right hand
+            MATCH TRUNK trunk in your right hand
+            MATCH BOX box in your right hand
+            MATCH COFFER coffer in your right hand
+            MATCH CHEST chest in your right hand
+            MATCH SKIPPET skippet in your right hand
+            MATCH CRATE crate in your right hand
+            MATCH NEWBOX in your right hand
+
+            PUT GLANCE
+
+            MATCHWAIT
+
+STRONGBOX:
+
+            SAVE STRONGBOX
+            GOTO STORPICK
+
+CADDY:
+
+            SAVE CADDY
+            GOTO STORPICK
+
+CASKET:
+
+            SAVE CASKET
+            GOTO STORPICK
+
+TRUNK:
+
+            SAVE TRUNK
+            GOTO STORPICK
+
+BOX:
+
+            SAVE BOX
+            GOTO STORPICK
+
+COFFER:
+
+            SAVE COFFER
+            GOTO STORPICK
+
+CHEST:
+
+            SAVE CHEST
+            GOTO STORPICK
+
+SKIPPET:
+
+            SAVE SKIPPET
+            GOTO STORPICK
+
+CRATE:
+
+            SAVE CRATE
+            GOTO STORPICK
+
+NEWBOX:
+
+            ECHO *** Unknown Box Type!
+            GOTO DONE
+
+STORPICK:
+
+            IF_2 PUT PUT LOCKP IN MY %2
+            IF_2 GOTO DONE
+
+            PUT STOW LOCKP
+
+DONE:
+
+            put /d
+

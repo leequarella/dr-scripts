@@ -37,6 +37,7 @@ class MechLore
       braid
     elsif screwed_up?(check)
       fput "drop grass"
+      fput "drop grass"
     end
   end
 
