@@ -35,9 +35,14 @@ class IdentifyLock
   def identify
     verb = "PICK MY #{@box} IDEN"
     check = dothis verb, IDENTIFIED_CHECKS
-    waitrt?
     trapped? check
+    if @trapped
+      fput "**************IT'S STILL DAMN TRAPPED!!!!!!"
+    else
+      fput "*******Safe to pick. Not trapped."
+    end
     return if @trapped
+    waitrt?
     difficulty? check
     if @difficulty == "not identified"
       identify
@@ -45,7 +50,8 @@ class IdentifyLock
   end
 
   def trapped? check
-    @trapped = check =~ /not fully disarmed/)
+    fput check.to_s
+    @trapped = (check =~ /not fully disarmed/)
   end
 
   def difficulty? check
@@ -92,7 +98,5 @@ class IdentifyLock
     else
       @difficulty = "not identified"
     end
-
-
   end
 end

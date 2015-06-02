@@ -1,0 +1,2 @@
+load "scripts/lee/gear.rb"
+Gear.dress

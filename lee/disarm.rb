@@ -1,5 +1,5 @@
 class Disarm
-  attr_reader :sprung, :disarmed
+  attr_reader :sprung, :disarmed, :more_traps
   DISARMING = Regexp.union([
     /not yet fully disarmed/,
     /proves too difficult to manipulate/,
@@ -57,7 +57,8 @@ class Disarm
   def disarmed? check
     if(check =~ /not yet fully disarmed/)
       fput "NOT DISARMED, MOAR TRAPS!!!!!"
-      @disarmed = false
+      @disarmed = true
+      @more_traps = true
 
     elsif(check =~ /lock springs out and stabs you painfully in the finger/ ||
      check =~ /An acrid stream of sulfurous air hisses quietly/ ||
