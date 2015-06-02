@@ -1,13 +1,14 @@
+load "scripts/lee/get_box.rb"
 load "scripts/lee/identify_trap.rb"
 load "scripts/lee/disarm.rb"
 load "scripts/lee/identify_lock.rb"
 load "scripts/lee/pick.rb"
 load "scripts/lee/empty_box.rb"
 
-box = script.vars[1]
+container = script.vars[1]
 
-armor = ["glo", "leath", "targ", "bala"]
-
+#armor = ["glo", "leath", "targ", "bala"]
+#
 #fput "stow right"
 #fput "stow left"
 #armor.each do |a|
@@ -16,35 +17,47 @@ armor = ["glo", "leath", "targ", "bala"]
 #  fput "stow left"
 #end
 
-fput "get my #{box}"
+#fput "get my #{box}"
 
-trap_identity = IdentifyTrap.new(box)
-
-unless trap_identity.disarmed
-  dis = Disarm.new(box, trap_identity.difficulty)
-  while dis.more_traps && !(dis.disarmed || dis.sprung)
-    dis = Disarm.new(box, trap_identity.difficulty)
-  end
-  if dis.sprung
-    fput "*********************** Sprung the trap! ****************************************"
-  end
-end
-
-lock_identity = IdentifyLock.new(box)
-
-unless lock_identity.picked
-  pick = Pick.new(box, lock_identity.difficulty)
-  while pick.more_locks && !pick.picked
-    pick = Pick.new(box, lock_identity.difficulty)
-  end
-end
-
-fput "*********************** Box has been popped! ****************************************"
-
-EmptyBox.new(box)
-
+DisarmController.new(container)
 
 #armor.each do |a|
 #  fput "get my #{a}"
 #  fput "wear my #{a}"
 #end
+
+class DisarmController
+  def initialize(container)
+    @box = next_box(container)
+    while @box != "none left"
+      pop @box
+      @box = next_box(container)
+    end
+  end
+
+  def next_box(container)
+    got = GetBox.new(container)
+     got.box_name
+  end
+
+  def pop(box)
+    disarm(box)
+    pick(box)
+    fput "*********************** Box has been popped! ****************************************" 
+    EmptyBox.new(box)
+  end
+
+  def disarm(box)
+    trap_identity = IdentifyTrap.new(box)
+    Disarm.new(box, trap_identity.difficulty)
+  end
+
+  def pick(box)
+    lock_identity = IdentifyLock.new(box)
+    if lock_identity.trapped
+      pop(box)
+    else
+      Pick.new(box, lock_identity.difficulty)
+    end
+  end
+end

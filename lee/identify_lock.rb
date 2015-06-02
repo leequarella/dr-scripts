@@ -1,5 +1,5 @@
 class IdentifyLock
-  attr_accessor :difficulty, :box, :picked
+  attr_accessor :difficulty, :box, :picked, :trapped
 
   IDENTIFIED_CHECKS = Regexp.union([
     /fails to teach you anything about the lock guarding it/,
@@ -23,6 +23,7 @@ class IdentifyLock
     /You could just jump off a cliff and save/,
     /You probably have the same shot as a snowball/,
     /A pitiful snowball encased in the Flames/,
+    /not fully disarmed/
   ])
 
   def initialize(box)
@@ -35,10 +36,16 @@ class IdentifyLock
     verb = "PICK MY #{@box} IDEN"
     check = dothis verb, IDENTIFIED_CHECKS
     waitrt?
+    trapped? check
+    return if @trapped
     difficulty? check
     if @difficulty == "not identified"
       identify
     end
+  end
+
+  def trapped? check
+    @trapped = check =~ /not fully disarmed/)
   end
 
   def difficulty? check
