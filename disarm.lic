@@ -1,4 +1,3 @@
-load "scripts/lee/gear.rb"
 load "scripts/lee/get_box.rb"
 load "scripts/lee/identify_trap.rb"
 load "scripts/lee/disarm.rb"

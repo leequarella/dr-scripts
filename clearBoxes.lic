@@ -1,0 +1,22 @@
+load "scripts/lee/get_box.rb"
+load "scripts/lee/empty_box.rb"
+
+class Controller
+  def initialize(container, worn=false)
+    @box = next_box(container, worn)
+    while @box != "none left"
+      EmptyBox.new(@box)
+      @box = next_box(container, worn)
+    end
+  end
+
+  def next_box(container, worn)
+    got = GetBox.new(container, worn)
+    got.box_name
+  end
+
+end
+
+container = script.vars[1]
+worn      = script.vars[2]
+Controller.new(container, worn)

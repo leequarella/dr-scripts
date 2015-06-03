@@ -28,6 +28,7 @@ class IdentifyLock
     /You could just jump off a cliff and save/,
     /You probably have the same shot as a snowball/,
     /A pitiful snowball encased in the Flames/,
+    /not even locked/,
   ])
 
   def initialize(box)
