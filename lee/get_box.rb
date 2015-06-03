@@ -10,6 +10,7 @@ class GetBox
     /trunk/,
     /coffer/,
     /casket/,
+    /crate/,
   ])
 
   def initialize(container, worn)
@@ -18,8 +19,7 @@ class GetBox
     fput "stow left"
     fput "stow right"
     find_box
-  end
-
+  end 
   def find_box
     fput "get my #{@container}" unless @worn
     check = dothis("look in my #{@container}", BOXES)
@@ -52,6 +52,9 @@ class GetBox
     elsif(check =~ /casket/)
       fput "get casket from my #{@container}"
       @box_name = "casket"
+    elsif(check =~ /crate/)
+      fput "get crate from my #{@container}"
+      @box_name = "crate"
     else
       @box_name = "none left"
     end

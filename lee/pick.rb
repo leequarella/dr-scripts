@@ -1,5 +1,5 @@
 class Pick
-  attr_reader :picked, :no_picks
+  attr_reader :picked, :no_picks, :more_locks
   PICK_CHECK = Regexp.union([
     /You are unable to make any progress towards opening the lock/,
     /just broke/,
@@ -28,7 +28,8 @@ class Pick
   def picked? check
     if(check =~ /You discover another lock protecting/ ||
       check =~ /You are unable to make any progress towards opening the lock/)
-      @picked = false
+      @picked = true
+      @more_locks = true
     elsif(check =~ /Find a more appropriate tool and try again/)
       @no_picks = true
     else

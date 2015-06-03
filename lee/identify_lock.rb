@@ -1,8 +1,12 @@
 class IdentifyLock
   attr_accessor :difficulty, :box, :picked, :trapped
 
-  IDENTIFIED_CHECKS = Regexp.union([
+  STILL_TRAPPED = Regexp.union([
     /not fully disarmed/,
+    /Somebody has already/,
+    /Roundtime/,
+  ])
+  IDENTIFIED_CHECKS = Regexp.union([
     /fails to teach you anything about the lock guarding it/,
     /Find a more appropriate tool and try again/,
     /not even locked, why bother?/,
@@ -34,14 +38,19 @@ class IdentifyLock
 
   def identify
     verb = "PICK MY #{@box} IDEN"
-    check = dothis verb, IDENTIFIED_CHECKS
-    trapped? check
+    check_for_traps = dothis verb, STILL_TRAPPED
+    trapped? check_for_traps
     if @trapped
       fput "**************IT'S STILL DAMN TRAPPED!!!!!!"
     else
       fput "*******Safe to pick. Not trapped."
+      check_difficulty
     end
-    return if @trapped
+  end
+
+  def check_difficulty
+    verb = "PICK MY #{@box} IDEN"
+    check = dothis verb, IDENTIFIED_CHECKS
     waitrt?
     difficulty? check
     if @difficulty == "not identified"
@@ -50,7 +59,6 @@ class IdentifyLock
   end
 
   def trapped? check
-    fput check.to_s
     @trapped = (check =~ /not fully disarmed/)
   end
 

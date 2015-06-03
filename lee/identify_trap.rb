@@ -35,6 +35,7 @@ class IdentifyTrap
     /trap harmless/,
     /a tiny metal lever has been bent away from the casing/,
     /rests a small deflated bladder/,
+    /You deem it quite safe/,
   ])
 
   def initialize(box)
@@ -91,6 +92,7 @@ class IdentifyTrap
      check =~ /trap harmless/ ||
      check =~ /A row of concealed openings on the front of the strongbox/ ||
      check =~ /rests a small deflated bladder/ ||
+     check =~ /You deem it quite safe/ ||
      check =~ /a tiny metal lever has been bent away from the casing/)
       @difficulty = "disarmed"
       @disarmed   = true

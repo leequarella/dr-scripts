@@ -29,7 +29,7 @@ class DisarmController
 
   def disarm(box)
     trap_identity = IdentifyTrap.new(box)
-    disarm = Disarm.new(box, trap_identity.difficulty)
+    disarm = Disarm.new(box, trap_identity.difficulty) unless trap_identity.disarmed
     disarm box if disarm.more_traps
   end
 
@@ -38,8 +38,9 @@ class DisarmController
     if lock_identity.trapped
       pop(box)
     else
-      Pick.new(box, lock_identity.difficulty)
+      pick = Pick.new(box, lock_identity.difficulty)
     end
+    pick(box) if pick.more_locks
   end
 end
 
@@ -47,6 +48,6 @@ end
 container = script.vars[1]
 worn      = script.vars[2]
 
-Gear.undress
+fput "******************** MAKE SURE YOU UNDRESS FIRST!!!!! ************************"
 
 DisarmController.new(container, worn)
