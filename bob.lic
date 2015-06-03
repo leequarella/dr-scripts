@@ -1,0 +1,8 @@
+while true
+  fput "bob"
+  waitrt?
+  fput "circle"
+  waitrt?
+  fput "weave"
+  waitrt?
+end
