@@ -1,0 +1,7 @@
+weapon   = script.vars[1]
+creature = script.vars[2]
+while true
+  fput "lob #{weapon} at #{creature}"
+  waitrt?
+  fput "get #{weapon}"
+end
