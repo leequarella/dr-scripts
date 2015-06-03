@@ -2,6 +2,7 @@ class IdentifyLock
   attr_accessor :difficulty, :box, :picked, :trapped
 
   IDENTIFIED_CHECKS = Regexp.union([
+    /not fully disarmed/,
     /fails to teach you anything about the lock guarding it/,
     /Find a more appropriate tool and try again/,
     /not even locked, why bother?/,
@@ -23,7 +24,6 @@ class IdentifyLock
     /You could just jump off a cliff and save/,
     /You probably have the same shot as a snowball/,
     /A pitiful snowball encased in the Flames/,
-    /not fully disarmed/
   ])
 
   def initialize(box)
