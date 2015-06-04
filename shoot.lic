@@ -1,0 +1,18 @@
+while true
+  fput "load"
+  pause 1
+  waitrt?
+  fput "aim"
+  pause 1
+  waitrt?
+
+  waitfor "You think you have your best shot possible now"
+
+  result = Attack.new("shoot").killed
+  pause 1
+  waitrt?
+  if result == true
+    Skin.new
+    Loot.new
+  end
+end

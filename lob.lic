@@ -1,7 +1,33 @@
+load "scripts/lee/loot.rb"
+load "scripts/lee/skin.rb"
+load "scripts/lee/attack.rb"
+load "scripts/lee/combat_assessment.rb"
+
 weapon   = script.vars[1]
 creature = script.vars[2]
-while true
-  fput "lob #{weapon} at #{creature}"
-  waitrt?
-  fput "get #{weapon}"
+
+class KillCritter
+  def initialize(weapon, critter)
+    attack_until_dead_with weapon, critter
+  end
+
+  def attack_until_dead_with weapon, critter
+    fput "get #{weapon}"
+    result = Attack.new("lob #{weapon} at #{critter}").killed
+    waitrt?
+    if result == true
+      killed_critter
+    else
+      attack_until_dead_with weapon, critter
+    end
+  end
+
+  def killed_critter
+    Skin.new
+    Loot.new
+  end
+end
+
+while true do
+  KillCritter.new weapon, creature
 end
