@@ -1,0 +1,3 @@
+load "scripts/lee/recover_ammo.rb"
+ammo = script.vars[1]
+RecoverAmmo.new(ammo)

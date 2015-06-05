@@ -1,0 +1,72 @@
+load "scripts/lee/skill_check.rb"
+load "scripts/lee/loot.rb"
+load "scripts/lee/skin.rb"
+load "scripts/lee/attack.rb"
+load "scripts/lee/lob.rb"
+load "scripts/lee/shoot.rb"
+load "scripts/lee/recover_ammo.rb"
+load "scripts/lee/combat_assessment.rb"
+
+
+class SpearChucker
+  def initialize(creature)
+    fput "untie spear"
+    Lob.new("spear", creature)
+    fput "get spear"
+    fput "tie spear to st tool"
+  end
+end
+
+class BoomerangChucker
+  def initialize(creature)
+    fput "wiel boko "
+    Lob.new("boko", creature)
+    fput "get boko"
+    fput "she boko in bag"
+  end
+end
+
+class Shooter
+  def initialize(creature, weapon, ammo)
+    take_weapon weapon
+    ShootBow.new(weapon, ammo, creature)
+    stow_weapon weapon
+  end
+
+  def take_weapon weapon
+    if weapon == "crossbow"
+      get_crossbow
+    else
+      fput "take my #{weapon}"
+    end
+  end
+
+  def stow_weapon weapon
+    if weapon == "crossbow"
+      stow_crossbow
+    else
+      fput "stow my #{weapon}"
+    end
+  end
+
+  def get_crossbow
+    fput "untie crossbow"
+  end
+
+  def stow_crossbow
+    fput "tie crossbow to braid tool"
+  end
+end
+
+creature = script.vars[1]
+
+while true
+  SpearChucker.new(creature)                 unless SkillCheck.locked?("heavy thrown")
+  BoomerangChucker.new(creature)             unless SkillCheck.locked?("light thrown")
+  Shooter.new(creature, "bow", "arrow")      unless SkillCheck.locked?("bow")
+  Shooter.new(creature, "crossbow", "bolt")  unless SkillCheck.locked?("crossbow")
+  Shooter.new(creature, "sling", "rock")     unless SkillCheck.locked?("sling")
+  RecoverAmmo.new('bolt')
+  RecoverAmmo.new('arrow')
+  RecoverAmmo.new('rock')
+end
