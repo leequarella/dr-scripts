@@ -65,8 +65,8 @@ while true
   BoomerangChucker.new(creature)             unless SkillCheck.locked?("light thrown")
   Shooter.new(creature, "bow", "arrow")      unless SkillCheck.locked?("bow")
   Shooter.new(creature, "crossbow", "bolt")  unless SkillCheck.locked?("crossbow")
-  Shooter.new(creature, "sling", "rock")     unless SkillCheck.locked?("sling")
+  Shooter.new(creature, "sling", "sm rock")     unless SkillCheck.locked?("sling")
   RecoverAmmo.new('bolt')
   RecoverAmmo.new('arrow')
-  RecoverAmmo.new('rock')
+  RecoverAmmo.new('sm rock')
 end

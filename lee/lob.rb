@@ -5,7 +5,7 @@ class Lob
 
   def attack weapon, critter
     fput "get #{weapon}"
-    result = Attack.new("lob #{weapon} at #{critter}").killed
+    result = Attack.new("lob").killed
     waitrt?
     if result == true
       killed_critter
