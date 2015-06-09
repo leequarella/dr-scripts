@@ -38,6 +38,7 @@ class IdentifyTrap
     /You deem it quite safe/,
     /You guess it is already disarmed/,
     /have been bent/,
+    /It seems harmless/,
   ])
 
   def initialize(box)
@@ -97,6 +98,7 @@ class IdentifyTrap
      check =~ /You deem it quite safe/ ||
      check =~ /You guess it is already disarmed/ ||
      check =~ /have been bent/ ||
+     check =~ /It seems harmless/ ||
      check =~ /a tiny metal lever has been bent away from the casing/)
       @difficulty = "disarmed"
       @disarmed   = true
