@@ -1,5 +1,6 @@
 class Loot
   def initialize
+    pause 1
     fput "loot"
     waitrt?
     fput "stow nug"

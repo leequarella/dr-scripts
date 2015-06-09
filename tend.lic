@@ -1,0 +1,7 @@
+wounded_area = script.vars[0]
+while true
+  waitfor "The bandages binding your #{wounded_area}"
+  waitrt?
+  fput "tend my #{wounded_area}"
+  waitrt?
+end
