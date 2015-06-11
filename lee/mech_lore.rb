@@ -1,7 +1,7 @@
 class MechLore
   DONE = Regexp.union([/You stop, realizing/,
                        /You need to have more material in your other hand to continue braiding/,
-                       /You are certain that the braided grass is nothing more than wasted effort/,
+                       /wasted effort/,
                        /Roundtime/])
   HANDS = Regexp.union([/You glance down to see some braided grass in your left hand/,
                         /You glance down to see some grass in your right hand and some grass in your left hand/,
@@ -33,11 +33,11 @@ class MechLore
     command = "braid my grass with my grass"
     check = dothis(command, DONE)
     waitrt?
-    if !braided?(check)
+    if screwed_up?(check)
+      fput "drop grass"
+      fput "drop grass"
+    elsif !braided?(check)
       braid
-    elsif screwed_up?(check)
-      fput "drop grass"
-      fput "drop grass"
     end
   end
 
@@ -52,7 +52,7 @@ class MechLore
   end
 
   def screwed_up? thing
-    if(thing =~ /You are certain that the braided grass is nothing more than wasted effort/)
+    if(thing =~ /wasted effort/)
       true
     else
       false

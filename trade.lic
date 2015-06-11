@@ -1,0 +1,173 @@
+=begin
+
+A trading script! whooopee
+Execute this script with a contract in your hands and be in the same room as your caravan/animal
+You need to have a trading contract in your hands when starting.
+Only works in Zoluren. I will add other provinces when I get around to it
+There are some kinks with leth deriel contracts and using the ferry
+You need to have the escort.lic script for using the ferries
+author: Jonas
+game: dr
+tags: trading, step2
+version: 2015.06.08
+=end
+
+#The sturdy caravan stops and waits, having arrived at its destination.
+
+$debug = true
+
+class Contract
+  attr_accessor :destination_id, :payment, :destination_name
+  def initialize
+    @destination_name = nil
+    @destination_id = nil
+    @payment = nil
+    @payment_currency = nil
+  end
+
+  def read(re=nil)
+    """Reads contract in hand and parses destination and payment information"""
+    destination_re = /The guild office at (?<destination>.*) requires .*/
+    payment_re = /You estimate these goods are currently worth (.*) (Kronars|Dokoras|Lirums) on delivery\./
+    outposts = {
+      #These are room id's where the outpost clerk is
+      'arthe dale' => '8999',
+      'crossing' => '8916',
+      'tiger clan' => '1889',
+      'stone clan' => '8996',
+      'wolf clan' => '8997',
+      'dirge' => '1307',
+      'leth deriel' => '2039'
+    }
+    fput "read my contract"
+    while line = get
+      if line =~ /The guild office at (?<destination>.*) requires .*/
+        @destination_name = line.match(destination_re).captures
+        @destination_id = outposts[@destination_name[0].downcase]
+      elsif line =~ payment_re
+        # This is the last line of the contract so break when finished
+        @payment, @payment_currency = line.match(payment_re).captures
+        break
+      end
+    end
+    # Parsing according to this SO post http://stackoverflow.com/questions/9303984/ruby-regexp-group-matching-assign-variables-on-1-line
+  end
+
+  def check_hunger
+    dothis("look #{@name}", //)
+  end
+
+  def to_s
+    puts("Contract Info\n-------")
+    puts("destination_name: #{@destination_name[0]}")
+    puts("destination_id: #{@destination_id}")
+    puts("payment: #{@payment} #{@payment_currency}")
+  end
+
+  def deliver
+    """Delivers this contract to an outpost clerk"""
+    response = dothis("give my contract to clerk", //)
+  end
+end
+
+class Outpost
+  attr_accessor :name
+  def initialize
+    @room_id = nil
+    @name = nil
+  end
+
+end
+
+class Caravan
+  attr_reader :name, :description, :hunger
+  def initialize
+    @name = nil
+    @description = nil
+    @hunger = nil
+    @following = nil
+  end
+
+  def follow_me
+    hunger_re = [
+      /The .* might like something to eat\./,
+      /The .* looks hungry\./,
+      /The .* looks very hungry\./
+    ]
+    response = dothis("command my #{name} to follow", Regexp.union(hunger_re))
+  end
+
+  def to_s
+    puts("You're driving a #{@description} #{@name} and its hunger level is")
+  end
+
+  def recall
+    recall_re = /You seem to recall that you left your (?<caravan_desc>.*) (?<caravan_type>.*) right behind you\./
+    status = dothis("recall caravan", recall_re)
+    @description, @name = status.match(recall_re).captures
+  end
+
+  def feed
+    #The piebald bullock might like something to eat.
+    #The lumbering bullock looks hungry.
+    #The piebald bullock looks very hungry.
+    """Feed pack animal or caravan"""
+    fput "stow left"
+    fput "stow right"
+    fput "get grass"
+    fput "give #{@name}"
+  end
+end
+
+# May be irrelevant information
+# Delete if so
+ferries = {
+  'leth to crossing' => 1904,
+  'crossing to leth' => 957
+}
+
+def get_contract
+  """Get a contract from the minister"""
+end
+
+def pay_clerk
+  """Pay the clerk"""
+end
+
+def ride_ferry
+  while line = get
+    move "go dock" if line =~ /The ferry Hodierna's Grace reaches the dock and its crew ties the ferry off\./
+  end
+end
+
+def parse_input
+  """parse the command line input"""
+end
+
+def parse_contract(contract)
+  echo destination
+  echo "#{$1}"
+  puts $1
+end
+
+def step2(place)
+  # Step2 delivers the person to Alfrens Ferry then asks for escort.lic (when bound for Leth)
+  start_script("step2", ["#{place}"])
+  wait_while{ running?('step2') }
+end
+
+my_contract = Contract.new
+my_contract.read
+my_caravan = Caravan.new
+my_caravan.recall
+echo my_caravan if $debug
+my_contract.destination_id = variable[1] if variable[1]
+step2 my_contract.destination_id
+while line = get
+  break if XMLData.room_count.to_s == my_contract.destination_id.to_s
+  if line =~ /Your .* caravan .*, following you\.|Your .* bullock .*, following you\./
+    step2 my_contract.destination_id
+  end
+  break if Room.current.id.to_s == my_contract.destination_id.to_s
+end
+my_contract.deliver

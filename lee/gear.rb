@@ -4,12 +4,12 @@ class Gear
     "buckler",
     "leath",
     "knu",
+    "stick",
     "helm",
   ]
 
   def self.undress
-    fput "stow left"
-    fput "stow right"
+    fput "stow"
     ARMOR.each do |a|
       fput "rem #{a}"
       waitrt?
@@ -18,8 +18,7 @@ class Gear
   end
 
   def self.dress
-    fput "stow left"
-    fput "stow right"
+    fput "stow"
     ARMOR.each do |a|
       fput "get #{a}"
       fput "wear #{a}"

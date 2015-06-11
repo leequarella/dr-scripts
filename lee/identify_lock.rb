@@ -79,13 +79,6 @@ class IdentifyLock
       #@difficulty = "Too Hard"
       @difficulty = "careful"
 
-    elsif(check =~ /lock has the edge on you, but you/ ||
-     check =~ /You have some chance of being able to/ ||
-     check =~ /odds are against you/ ||
-     check =~ /would be a longshot/ ||
-     check =~ /You have an amazingly minimal chance/)
-      @difficulty = "careful"
-
     elsif(check =~ /trivially constructed piece of junk barely worth your time/ ||
      check =~ /will be a simple matter for you to unlock/ ||
      check =~ /should not take long with your skills/ ||
