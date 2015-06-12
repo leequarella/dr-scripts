@@ -24,13 +24,27 @@ WEAPONS = [small_edged, large_edged, small_blunt]
 appr = Appraisal.new
 
 while true do
-  Tactics.new         unless SkillCheck.locked?("tactics")
-  Debilitation.new    unless SkillCheck.locked?("debilitation")
-  Warding.new         unless SkillCheck.locked?("warding")
-  Augmentation.new    unless SkillCheck.locked?("augmentation")
-  appr.next           unless SkillCheck.locked?("appraisal")
-  Perception.new      unless SkillCheck.locked?("perception")
-  Expertise.new       unless SkillCheck.locked?("expertise")
+  Tactics.new      unless SkillCheck.locked?("tactics")
+  pause 1
+
+  Debilitation.new unless SkillCheck.locked?("debilitation")
+  pause 1
+
+  Warding.new      unless SkillCheck.locked?("warding")
+  pause 1
+
+  Augmentation.new unless SkillCheck.locked?("augmentation")
+  pause 1
+
+  appr.next        unless SkillCheck.locked?("appraisal")
+  pause 1
+
+  Perception.new   unless SkillCheck.locked?("perception")
+  pause 1
+
+  Expertise.new    unless SkillCheck.locked?("expertise")
+  pause 1
+
 
   WEAPONS.each do |weap|
     unless SkillCheck.locked?(weap[:skill])
@@ -41,6 +55,7 @@ while true do
       })
       CombatAssessment.new
     end
+    pause 1
   end
 
   unless SkillCheck.locked?("brawl")
