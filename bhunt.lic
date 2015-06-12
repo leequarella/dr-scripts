@@ -13,8 +13,8 @@ load "scripts/lee/perception.rb"
 load "scripts/lee/expertise.rb"
 load "scripts/lee/weapon_trainer.rb"
 
-fput 'stow left in pack'
-fput 'stow right in pack'
+fput 'stow left'
+fput 'stow right'
 
 small_edged = {skill: "small edge",  weapon: "telek",  attack_type: "jab", left: true}
 large_edged = {skill: "large edge",  weapon: "spatha", attack_type: "jab", left: true}

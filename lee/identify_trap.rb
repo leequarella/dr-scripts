@@ -73,7 +73,8 @@ class IdentifyTrap
      check =~ /You could just jump off a cliff and save/ ||
      check =~ /You probably have the same shot as a snowball/ ||
      check =~ /A pitiful snowball encased in the Flames/)
-      @difficulty = "too hard"
+      #@difficulty = "too hard"
+      @difficulty = "careful"
 
     elsif(check =~ /trivially constructed gadget which you can take down any time/ ||
     check =~ /This trap is a laughable matter, you could do it blindfolded/ ||

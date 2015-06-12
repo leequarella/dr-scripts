@@ -6,6 +6,15 @@ load "scripts/lee/lob.rb"
 load "scripts/lee/shoot.rb"
 load "scripts/lee/recover_ammo.rb"
 load "scripts/lee/combat_assessment.rb"
+load "scripts/lee/combat_trainer.rb"
+load "scripts/lee/appraisal.rb"
+load "scripts/lee/perception.rb"
+load "scripts/lee/expertise.rb"
+load "scripts/lee/tactics.rb"
+load "scripts/lee/debilitation.rb"
+load "scripts/lee/warding.rb"
+load "scripts/lee/augmentation.rb"
+
 
 
 class SpearChucker
@@ -60,6 +69,9 @@ end
 
 creature = script.vars[1]
 
+appr = Appraisal.new
+combat_trainer = CombatTrainer.new(appr)
+
 while true
   2.times do
     SpearChucker.new(creature)                 unless SkillCheck.locked?("heavy thrown")
@@ -70,6 +82,8 @@ while true
     BoomerangChucker.new(creature)             unless SkillCheck.locked?("light thrown")
     pause 1
   end
+
+  combat_trainer.next
 
   Shooter.new(creature, "bow", "arrow")      unless SkillCheck.locked?("bow")
   pause 1
