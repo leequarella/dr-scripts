@@ -1,5 +1,6 @@
 class Appraisal
   COMBAT = ["leather", "foot", "stick", "buckler", "knu", "spike"]
+
   def initialize(items=nil)
     @items = items || COMBAT
     @index = 0

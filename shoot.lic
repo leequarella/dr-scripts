@@ -1,3 +1,8 @@
+load "scripts/lee/loot.rb"
+load "scripts/lee/skin.rb"
+load "scripts/lee/attack.rb"
+load "scripts/lee/combat_assessment.rb"
+
 while true
   fput "load"
   pause 1

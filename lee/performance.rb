@@ -1,7 +1,7 @@
 class Performance
   DONE = Regexp.union([/You finish playing/])
 
-  def initialize(style="ditty off")
+  def initialize(style="ditty halt")
     fput "stow right"
     fput "stow left"
     fput "get whistle"

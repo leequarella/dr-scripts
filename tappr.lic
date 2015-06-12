@@ -1,0 +1,7 @@
+load "scripts/lee/appraisal.rb"
+TRADER_ITEMS = ["pack", "greave", "gaunt", "charm", "jerk", "hood", "shield"]
+appr = Appraisal.new(TRADER_ITEMS)
+
+while !SkillCheck.locked?("appraisal")
+  appr.next
+end

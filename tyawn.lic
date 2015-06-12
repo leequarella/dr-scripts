@@ -1,0 +1,38 @@
+require_relative "scripts/lee/skill_check.rb"
+load "scripts/lee/outdoorsmanship.rb"
+load "scripts/lee/alchemy.rb"
+load "scripts/lee/mech_lore.rb"
+load "scripts/lee/performance.rb"
+load "scripts/lee/juggle.rb"
+load "scripts/lee/appraisal.rb"
+
+fput "stow left"
+fput "stow right"
+while true do
+  TRADER_ITEMS = ["pack", "greave", "gaunt", "charm", "jerk", "hood", "shield"]
+  appr = Appraisal.new(TRADER_ITEMS)
+  while !SkillCheck.locked?("appraisal")
+    appr.next
+  end
+  fput "************************Locked Appraisal*****************************"
+
+  while !SkillCheck.locked?("mech")
+    MechLore.new
+  end
+  fput "************************Locked Mech*****************************"
+
+  fput "************************Locked Outdoorsmanship*****************************"
+  while !SkillCheck.locked?("alchemy")
+    Alchemy.new
+  end
+  fput "************************Locked Alchemy*****************************"
+
+  while !SkillCheck.locked?("performance")
+    Performance.new
+  end
+  fput "************************Locked Performance*****************************"
+
+  while !SkillCheck.locked?("outdoorsmanship")
+    Outdoorsmanship.new("rock")
+  end
+end

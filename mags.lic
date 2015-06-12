@@ -1,0 +1,20 @@
+load "scripts/lee/burden.rb"
+load "scripts/lee/skill_check.rb"
+load "scripts/lee/sell_branches.rb"
+
+
+while !SkillCheck.locked?("trading")
+  while !Burden.overburdened?
+    fput 'for branch'
+    waitrt?
+    fput 'stow branch'
+  end
+
+  start_script "go2", ['mags']
+  waitfor "Mags"
+  SellBranches.new
+
+  start_script "go2", ['ne']
+  waitfor "Northeast Wilds"
+  move "se"
+end

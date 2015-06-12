@@ -1,0 +1,71 @@
+material = script.vars[1]
+item = script.vars[2]
+
+class Tailor
+  THINGS = Regexp.union([
+   /One leather piece is too thick for the needle to penetrate and needs holes punched in it/,
+   /A critical section of leather needs holes punched into it so more thread can secure it/,
+   /Two pieces of the leather won't cooperate and could use some pins to align them/,
+   /The leather's dimensions appear to have shifted and could benefit from some remeasuring/,
+  ])
+
+  MEASURE = /With the measuring complete, now it is time to cut away more of the leather with scissors/
+
+  def initialize(material, item)
+    @material = material
+    @item = item
+    fput "stow left"
+    fput "stow right"
+    fput "get book"
+    fput "study book"
+    waitrt?
+    fput "stow left"
+    fput "stow right"
+    cut
+  end
+
+  def cut
+    fput "get #{@material}"
+    fput "get scissors"
+    fput "cut #{@material} with scissors"
+    waitrt?
+    fput "stow left"
+    fput "get #{@material}"
+    fput "stow left"
+    sew
+  end
+
+  def sew
+    fput "stow left"
+    fput "get needle"
+    check = dothis "push #{@item} with needle", THINGS
+    waitrt?
+    if needs_holes? check
+      awl
+    elsif needs_pins? check
+      pins
+    elsif done? check
+    else
+      sew
+    end
+  end
+
+  def pins
+    fput "stow left"
+    fput "get pins"
+    fput "push #{@item} with pins"
+    waitrt?
+  end
+
+  def awl
+    fput "stow left"
+    fput "get awl"
+    fput "poke #{@item} with awl"
+    waitrt?
+  end
+
+  def needs_pins?
+  end
+end
+
+Tailor.new(material, item)
