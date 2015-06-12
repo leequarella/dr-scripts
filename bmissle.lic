@@ -61,10 +61,16 @@ end
 creature = script.vars[1]
 
 while true
-  SpearChucker.new(creature)                 unless SkillCheck.locked?("heavy thrown")
-  pause 1
-  BoomerangChucker.new(creature)             unless SkillCheck.locked?("light thrown")
-  pause 1
+  2.times do
+    SpearChucker.new(creature)                 unless SkillCheck.locked?("heavy thrown")
+    pause 1
+  end
+
+  2.times do
+    BoomerangChucker.new(creature)             unless SkillCheck.locked?("light thrown")
+    pause 1
+  end
+
   Shooter.new(creature, "bow", "arrow")      unless SkillCheck.locked?("bow")
   pause 1
   Shooter.new(creature, "crossbow", "bolt")  unless SkillCheck.locked?("crossbow")
