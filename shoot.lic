@@ -1,7 +1,10 @@
 load "scripts/lee/loot.rb"
 load "scripts/lee/skin.rb"
 load "scripts/lee/attack.rb"
+load "scripts/lee/recover_ammo.rb"
 load "scripts/lee/combat_assessment.rb"
+
+ammo = script.vars[0]
 
 while true
   fput "load"
@@ -20,4 +23,5 @@ while true
     Skin.new
     Loot.new
   end
+  RecoverAmmo.new(ammo)
 end
