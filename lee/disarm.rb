@@ -35,6 +35,9 @@ class Disarm
     /you carefully pry at the studs working them/,
     /you manage to bend it well away from the mesh bag/,
     /allowing it to be opened safely/,
+
+    /You work with the trap for a while but are unable to make any progress/,
+
     /Roundtime/,
   ])
 
@@ -89,6 +92,9 @@ class Disarm
 
     elsif(check =~ /something to shift/)
       be_careful!
+
+    elsif(check =~ /You work with the trap for a while but are unable to make any progress/)
+      @disarmed   = false
 
     else
       @disarmed   = true

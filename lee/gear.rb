@@ -15,6 +15,7 @@ class Gear
       waitrt?
       fput "stow"
     end
+      fput "stow left"
   end
 
   def self.dress
