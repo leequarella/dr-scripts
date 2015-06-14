@@ -7,7 +7,7 @@ class Loot
 
   LOOT = Regexp.union([
     /was carrying/,
-    /anything/
+    /nothing of interest/,
   ])
 
   def initialize
