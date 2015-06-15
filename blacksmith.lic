@@ -1,0 +1,80 @@
+class Blacksmith
+  WORKING = Regexp.union([
+    /As you complete working the fire dies down and needs more fuel/,
+    /The rod could use some straightening along the horn of the anvil/,
+    /The worked metal looks to be in need of some oil to preserve and protect it/,
+    /The metal now appears ready for cooling in the slack tub/,
+    /Roundtime/,
+  ])
+
+  def initialize(metal, product)
+    @metal = metal
+    @product = product
+    start
+    make
+  end
+
+  def start
+    fput "get #{@metal} ingot"
+    fput "put ing on anv"
+    fput "get hammer"
+    fput "get tongs"
+    fput "pound ing on anv with hamm"
+  end
+
+  def make
+    check = pound
+    waitrt?
+    fput "stow right"
+    fput "stow left"
+    self.send(nextStep check)
+  end
+
+  def pound
+    fput "get hammer"
+    fput "get tongs"
+    dothis("pound #{@product} on anv with hammer", WORKING)
+  end
+
+  def nextStep check
+    if check =~ /As you complete working the fire dies down and needs more fuel/
+      :shovel
+    elsif check =~ /The rod could use some straightening along the horn of the anvil/
+      :tongs
+    elsif check =~ /The worked metal looks to be in need of some oil to preserve and protect it/
+      :oil
+    elsif check =~ /The metal now appears ready for cooling in the slack tub/,
+      :tub
+    else
+      :pound
+    end
+  end
+
+  def tub
+    fput "push tub"
+  end
+
+  def shovel
+    fput "get shovel"
+    fput "push fuel with shovel"
+    waitrt?
+    fput "stow shovel"
+  end
+
+  def tongs
+    fput "get tongs"
+    fput "turn #{@product} with tongs"
+    waitrt?
+    fput "stow tongs"
+  end
+
+  def oil
+    fput "get oil"
+    fput "get #{@product} from anvil"
+    fput "pour oil on #{@product}"
+  end
+end
+
+metal   = script.vars[1]
+product = script.vars[2]
+Blacksmith.new(metal, product)

@@ -2,70 +2,89 @@ material = script.vars[1]
 item = script.vars[2]
 
 class Tailor
-  THINGS = Regexp.union([
-   /One leather piece is too thick for the needle to penetrate and needs holes punched in it/,
-   /A critical section of leather needs holes punched into it so more thread can secure it/,
+  WORKING = Regexp.union([
+   /One leather piece is too thick/,
+   /A critical section of leather needs holes/,
    /Two pieces of the leather won't cooperate and could use some pins to align them/,
    /The leather's dimensions appear to have shifted and could benefit from some remeasuring/,
+   /The fabric develops wrinkles from all the handling and could use a quick ironing/,
+   /A deep crease develops along the fabric, bunching it together awkwardly/,
+   /Roundtime/,
   ])
 
-  MEASURE = /With the measuring complete, now it is time to cut away more of the leather with scissors/
+  WHATS_NEXT = Regexp.union([
+    /needle and thread/,
+    /straight pins/,
+    /slickstone/,
+  ])
 
-  def initialize(material, item)
-    @material = material
+  def initialize(item)
     @item = item
-    fput "stow left"
-    fput "stow right"
-    fput "get book"
-    fput "study book"
+    check = dothis("analyze #{@item}", WHATS_NEXT)
     waitrt?
-    fput "stow left"
-    fput "stow right"
-    cut
+    make(first_step? check)
   end
 
-  def cut
-    fput "get #{@material}"
-    fput "get scissors"
-    fput "cut #{@material} with scissors"
+  def make(next_step)
+    check = dothis(next_step, WORKING)
     waitrt?
-    fput "stow left"
-    fput "get #{@material}"
-    fput "stow left"
-    sew
+    fput "stow"
+    next_step = next_step? check
+    make(next_step) if next_step
   end
 
-  def sew
-    fput "stow left"
-    fput "get needle"
-    check = dothis "push #{@item} with needle", THINGS
-    waitrt?
-    if needs_holes? check
-      awl
-    elsif needs_pins? check
-      pins
-    elsif done? check
-    else
+  def first_step? check
+    if check =~ /needle and thread/
       sew
+    elsif check =~ /straight pins/
+      pins
+    elsif check =~ /slickstone/
+      iron
     end
   end
 
+  def next_step? check
+    if check =~ /One leather piece is too thick/ ||
+    check =~ /A critical section of leather needs holes/
+      awl
+
+    elsif check =~ /The leather's dimensions appear to have shifted and could benefit from some remeasuring/
+      measure
+
+    elsif check =~ /The fabric develops wrinkles from all the handling and could use a quick ironing/ ||
+    check =~ /A deep crease develops along the fabric, bunching it together awkwardly/
+      iron
+
+    elsif check =~ /Two pieces of the leather won't cooperate and could use some pins to align them/
+      pins
+    end
+  end
+
+  def cut
+    fput "get scissors"
+    "cut #{@item} with scissors"
+  end
+
+  def sew
+    fput "get needle"
+   "push #{@item} with needle"
+  end
+
   def pins
-    fput "stow left"
     fput "get pins"
-    fput "push #{@item} with pins"
-    waitrt?
+    "poke #{@item} with pins"
   end
 
   def awl
-    fput "stow left"
     fput "get awl"
-    fput "poke #{@item} with awl"
-    waitrt?
+    "poke #{@item} with awl"
   end
 
-  def needs_pins?
+  def iron
+    fput "get slick"
+    "rub #{@item} with slick"
   end
 end
 
-Tailor.new(material, item)
+item = script.vars[1]
+Tailor.new(item)
