@@ -6,16 +6,22 @@ class Tailor
    /One leather piece is too thick/,
    /A critical section of leather needs holes/,
    /Two pieces of the leather won't cooperate and could use some pins to align them/,
-   /The leather's dimensions appear to have shifted and could benefit from some remeasuring/,
+   /dimensions appear to have shifted and could benefit from some remeasuring/,
    /The fabric develops wrinkles from all the handling and could use a quick ironing/,
    /A deep crease develops along the fabric, bunching it together awkwardly/,
    /Roundtime/,
+   /You realize that cannot be repaired, and stop/,
+  ])
+
+  MEASURE = Regexp.union([
+    /now it is time to cut away more of the leather with scissors/
   ])
 
   WHATS_NEXT = Regexp.union([
     /needle and thread/,
     /straight pins/,
     /slickstone/,
+    /remeasuring and cutting/,
   ])
 
   def initialize(item)
@@ -40,6 +46,8 @@ class Tailor
       pins
     elsif check =~ /slickstone/
       iron
+    elsif check =~ /remeasuring and cutting/
+      yardstick
     end
   end
 
@@ -48,8 +56,8 @@ class Tailor
     check =~ /A critical section of leather needs holes/
       awl
 
-    elsif check =~ /The leather's dimensions appear to have shifted and could benefit from some remeasuring/
-      measure
+    elsif check =~ /dimensions appear to have shifted and could benefit from some remeasuring/
+      yardstick
 
     elsif check =~ /The fabric develops wrinkles from all the handling and could use a quick ironing/ ||
     check =~ /A deep crease develops along the fabric, bunching it together awkwardly/
@@ -57,6 +65,13 @@ class Tailor
 
     elsif check =~ /Two pieces of the leather won't cooperate and could use some pins to align them/
       pins
+
+    elsif check =~ /You realize that cannot be repaired, and stop/
+      done
+
+    else
+      sew
+
     end
   end
 
@@ -83,6 +98,28 @@ class Tailor
   def iron
     fput "get slick"
     "rub #{@item} with slick"
+  end
+
+  def scissors
+    fput "get scissors"
+    "cut #{@item} with scissors"
+  end
+
+  def yardstick
+    fput "get yard"
+    check = dothis "measure #{@item} with yard", MEASURE
+    waitrt?
+    fput "stow yard"
+    if check =~ /now it is time to cut away more of the leather with scissors/
+      make(scissors)
+    else
+      make(sew)
+    end
+  end
+
+  def done
+    fput "******************************** DONE"
+    false
   end
 end
 

@@ -8,11 +8,14 @@ class Shape
   WHATS_NEXT =  Regexp.union([
     /shaper/,
     /knife carving/,
+    /carving with a knife/,
     /a rasp/,
   ])
 
   def initialize(product)
     @product = product
+    fput "stow"
+    waitrt?
     check = dothis("analyze #{@product}", WHATS_NEXT)
     waitrt?
     make(first_step? check)
@@ -29,7 +32,8 @@ class Shape
   def first_step? check
     if check =~ /shaper/
       shaper
-    elsif check =~ /knife carving/
+    elsif check =~ /knife carving/ ||
+    check =~ /carving with a knife/
       knife
     elsif check =~ /a rasp/
       rasp
@@ -46,6 +50,7 @@ class Shape
     elsif check =~ /A bulbous knot will make continued shaping difficult unless rubbed out with a rasp/
       rasp
     else
+      done
       false
     end
   end
@@ -63,6 +68,10 @@ class Shape
   def rasp
     fput "get rasp"
     verb = "rub #{@product} with rasp"
+  end
+
+  def done
+    fput "DONE YAY!"
   end
 end
 
