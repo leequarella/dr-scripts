@@ -14,13 +14,15 @@ class Tailor
   ])
 
   MEASURE = Regexp.union([
-    /now it is time to cut away more of the leather with scissors/
+    /now it is time to cut away more of the leather with scissors/,
+    /Roundtime/
   ])
 
   WHATS_NEXT = Regexp.union([
     /needle and thread/,
     /straight pins/,
     /slickstone/,
+    /scissor/,
     /remeasuring and cutting/,
   ])
 
@@ -48,6 +50,8 @@ class Tailor
       iron
     elsif check =~ /remeasuring and cutting/
       yardstick
+    elsif check =~ /scissors/
+      scissors
     end
   end
 
@@ -73,11 +77,6 @@ class Tailor
       sew
 
     end
-  end
-
-  def cut
-    fput "get scissors"
-    "cut #{@item} with scissors"
   end
 
   def sew
