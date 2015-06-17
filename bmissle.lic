@@ -69,6 +69,10 @@ end
 
 creature = script.vars[1]
 
+fput "stance parry 0"
+fput "stance shield 91"
+fput "stance evasion 92"
+
 appr = Appraisal.new
 combat_trainer = CombatTrainer.new(appr)
 

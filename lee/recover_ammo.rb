@@ -10,6 +10,7 @@ class RecoverAmmo
 
   def get_all ammo
     check = dothis("stow #{ammo}", GOT_ALL)
+    pause 0.2
     none_left = got_all? check
     get_all ammo unless none_left
   end

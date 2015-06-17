@@ -15,6 +15,10 @@ load "scripts/lee/weapon_trainer.rb"
 
 fput 'stow left'
 fput 'stow right'
+fput "stance parry 61"
+fput "stance shield 61"
+fput "stance evasion 61"
+
 
 small_edged = {skill: "small edge",  weapon: "telek",  attack_type: "jab", left: true}
 large_edged = {skill: "large edge",  weapon: "spatha", attack_type: "jab", left: true}

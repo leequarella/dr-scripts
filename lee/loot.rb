@@ -23,6 +23,7 @@ class Loot
       more = true
       while more
         more = grab thing
+        pause 0.25
       end
     end
   end
