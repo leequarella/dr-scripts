@@ -3,6 +3,7 @@ load "scripts/lee/combat_assessment.rb"
 load "scripts/lee/loot.rb"
 load "scripts/lee/skin.rb"
 load "scripts/lee/attack.rb"
+load "scripts/lee/stance.rb"
 
 load "scripts/lee/tactics.rb"
 load "scripts/lee/debilitation.rb"
@@ -15,9 +16,8 @@ load "scripts/lee/weapon_trainer.rb"
 
 fput 'stow left'
 fput 'stow right'
-fput "stance parry 61"
-fput "stance shield 61"
-fput "stance evasion 61"
+
+Stance.balanced
 
 
 small_edged = {skill: "small edge",  weapon: "telek",  attack_type: "jab", left: true}

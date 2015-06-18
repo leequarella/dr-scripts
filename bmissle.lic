@@ -14,6 +14,7 @@ load "scripts/lee/tactics.rb"
 load "scripts/lee/debilitation.rb"
 load "scripts/lee/warding.rb"
 load "scripts/lee/augmentation.rb"
+load "scripts/lee/stance.rb"
 
 
 
@@ -69,20 +70,18 @@ end
 
 creature = script.vars[1]
 
-fput "stance parry 0"
-fput "stance shield 91"
-fput "stance evasion 92"
+Stance.missle
 
 appr = Appraisal.new
 combat_trainer = CombatTrainer.new(appr)
 
 while true
-  2.times do
+  4.times do
     SpearChucker.new(creature)                 unless SkillCheck.locked?("heavy thrown")
     pause 1
   end
 
-  2.times do
+  4.times do
     BoomerangChucker.new(creature)             unless SkillCheck.locked?("light thrown")
     pause 1
   end
