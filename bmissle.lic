@@ -76,12 +76,12 @@ appr = Appraisal.new
 combat_trainer = CombatTrainer.new(appr)
 
 while true
-  4.times do
+  5.times do
     SpearChucker.new(creature)                 unless SkillCheck.locked?("heavy thrown")
     pause 1
   end
 
-  4.times do
+  5.times do
     BoomerangChucker.new(creature)             unless SkillCheck.locked?("light thrown")
     pause 1
   end

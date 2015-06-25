@@ -1,6 +1,7 @@
 load "scripts/lee/get_box.rb"
 load "scripts/lee/identify_trap.rb"
 load "scripts/lee/disarm.rb"
+load "scripts/lee/harvest.rb"
 load "scripts/lee/identify_lock.rb"
 load "scripts/lee/pick.rb"
 load "scripts/lee/empty_box.rb"
@@ -23,6 +24,7 @@ class DisarmController
     disarm(box)
     pick(box)
     fput "*********************** Box has been popped! ****************************************" 
+    Harvest.new box
     EmptyBox.new(box)
   end
 
