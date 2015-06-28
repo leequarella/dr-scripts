@@ -3,6 +3,7 @@ class Shape
     /The wood is ready to have more fine detail carved with a carving knife/,
     /Shaping with a wood shaper is needed to futher smooth the material's surface/,
     /A bulbous knot will make continued shaping difficult unless rubbed out with a rasp/,
+    /you complete working/,
   ])
 
   WHATS_NEXT =  Regexp.union([
@@ -16,7 +17,7 @@ class Shape
     @product = product
     fput "stow"
     waitrt?
-    check = dothis("analyze #{@product}", WHATS_NEXT)
+    check = dothis("analyze my #{@product}", WHATS_NEXT)
     waitrt?
     make(first_step? check)
   end
@@ -50,30 +51,67 @@ class Shape
     elsif check =~ /A bulbous knot will make continued shaping difficult unless rubbed out with a rasp/
       rasp
     else
-      done
+      bundle_with_logbook
       false
     end
   end
 
   def knife
     fput "get knife"
-    verb = "carve #{@product} with knife"
+    verb = "carve my #{@product} with my knife"
   end
 
   def shaper
     fput "get shaper"
-    verb = "shape #{@product} with shaper"
+    verb = "shape my #{@product} with my shaper"
   end
 
   def rasp
     fput "get rasp"
-    verb = "rub #{@product} with rasp"
+    verb = "rub my #{@product} with my rasp"
   end
 
-  def done
-    fput "DONE YAY!"
+  def bundle_with_logbook
+    fput "stow"
+    fput "get log"
+    fput "bund my #{@product} with my log"
   end
 end
 
+class StartShape
+  STARTED = Regexp.union([
+    /What were you referring to/,
+    /You get/
+  ])
+  def initialize(product)
+    @product = product
+    check = dothis "get my #{@product}", STARTED
+    next_step check
+  end
+
+  def next_step check
+    if check =~ /What were you referring to/
+      start
+    end
+  end
+
+  def start
+    fput 'get draw'
+    waitrt?
+    fput 'get lumb'
+    waitrt?
+    fput 'scrape lumb with draw'
+    waitrt?
+    fput 'stow'
+    fput 'get lumb'
+    fput 'stow'
+  end
+end
+
+fput "stow left"
+fput "stow right"
 product = script.vars[1]
+StartShape.new(product)
 Shape.new(product)
+
+#This work order appears to be complete

@@ -117,10 +117,48 @@ class Tailor
   end
 
   def done
+    bundle_with_logbook
     fput "******************************** DONE"
     false
   end
+
+  def bundle_with_logbook
+    fput "stow"
+    fput "get log"
+    fput "bund #{@item} with log"
+  end
 end
 
+class StartTailor
+  STARTED = Regexp.union([
+    /What were you referring to/,
+    /You get/
+  ])
+  def initialize(product)
+    @product = product
+    check = dothis "get my #{@product}", STARTED
+    next_step check
+  end
+
+  def next_step check
+    if check =~ /What were you referring to/
+      start
+    end
+  end
+
+  def start
+    fput 'get sci'
+    fput 'get leath'
+    fput 'cut leath with sci'
+    waitrt?
+    fput 'stow'
+    fput 'get leath'
+    fput 'stow'
+  end
+end
+
+fput "stow left"
+fput "stow right"
 item = script.vars[1]
+StartTailor.new(item)
 Tailor.new(item)

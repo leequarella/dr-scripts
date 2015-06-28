@@ -17,6 +17,7 @@ load "scripts/lee/weapon_trainer.rb"
 fput 'stow left'
 fput 'stow right'
 
+Stance.zero
 Stance.balanced
 
 

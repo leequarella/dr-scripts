@@ -88,7 +88,7 @@ while true
 
   combat_trainer.next
 
-  Shooter.new(creature, "bow", "arrow")      unless SkillCheck.locked?("bow")
+  Shooter.new(creature, "long", "arrow")      unless SkillCheck.locked?("bow")
   pause 1
   Shooter.new(creature, "crossbow", "bolt")  unless SkillCheck.locked?("crossbow")
   pause 1
