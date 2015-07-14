@@ -1,16 +1,19 @@
 class Shape
   WORKING = Regexp.union([
-    /The wood is ready to have more fine detail carved with a carving knife/,
-    /Shaping with a wood shaper is needed to futher smooth the material's surface/,
+    /carving knife/,
+    /Shaping with a wood shaper is needed/,
     /A bulbous knot will make continued shaping difficult unless rubbed out with a rasp/,
     /you complete working/,
+    /clamps/,
+    /wood stain/,
+    /assemble/,
   ])
 
   WHATS_NEXT =  Regexp.union([
     /shaper/,
-    /knife carving/,
-    /carving with a knife/,
+    /knife/,
     /a rasp/,
+    /clamps/,
   ])
 
   def initialize(product)
@@ -18,6 +21,7 @@ class Shape
     fput "stow"
     waitrt?
     check = dothis("analyze my #{@product}", WHATS_NEXT)
+    pause 0.25
     waitrt?
     make(first_step? check)
   end
@@ -33,8 +37,7 @@ class Shape
   def first_step? check
     if check =~ /shaper/
       shaper
-    elsif check =~ /knife carving/ ||
-    check =~ /carving with a knife/
+    elsif check =~ /knife/
       knife
     elsif check =~ /a rasp/
       rasp
@@ -42,14 +45,22 @@ class Shape
   end
 
   def next_step? check
-    if check =~ /The wood is ready to have more fine detail carved with a carving knife/
+    if check =~ /carving knife/
       knife
 
-    elsif check =~ /Shaping with a wood shaper is needed to futher smooth the material's surface/
+    elsif check =~ /clamps/
+      clamps
+
+    elsif check =~ /Shaping with a wood shaper is needed/
       shaper
 
     elsif check =~ /A bulbous knot will make continued shaping difficult unless rubbed out with a rasp/
       rasp
+
+    elsif check =~ /wood stain/
+      finish_bow
+      false
+
     else
       bundle_with_logbook
       false
@@ -71,6 +82,24 @@ class Shape
     verb = "rub my #{@product} with my rasp"
   end
 
+  def clamps
+    fput "get clamps"
+    verb = "push my #{@product} with my clamps"
+  end
+
+  def finish_bow
+    fput "buy string from crate"
+    fput "assemble #{@product} with my string"
+    waitrt?
+    fput "get my stain"
+    fput "apply my stain to my #{@product}"
+    pause 0.2
+    waitrt?
+    fput "stow"
+    waitrt?
+    bundle_with_logbook
+  end
+
   def bundle_with_logbook
     fput "stow"
     fput "get log"
@@ -86,6 +115,7 @@ class StartShape
   def initialize(product)
     @product = product
     check = dothis "get my #{@product}", STARTED
+    fput "swap"
     next_step check
   end
 
@@ -96,6 +126,7 @@ class StartShape
   end
 
   def start
+    study_book
     fput 'get draw'
     waitrt?
     fput 'get lumb'
@@ -106,12 +137,25 @@ class StartShape
     fput 'get lumb'
     fput 'stow'
   end
+
+  def study_book
+    fput "get my book"
+    fput "study my book"
+    pause 0.2
+    waitrt?
+    fput "stow my book"
+  end
 end
 
-fput "stow left"
-fput "stow right"
 product = script.vars[1]
-StartShape.new(product)
-Shape.new(product)
+
+quantity = script.vars[2].nil? ? 1 : script.vars[2].to_i
+
+quantity.times do
+  fput "stow left"
+  fput "stow right"
+  StartShape.new(product)
+  Shape.new(product)
+end
 
 #This work order appears to be complete

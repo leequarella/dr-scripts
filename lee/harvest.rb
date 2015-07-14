@@ -104,6 +104,13 @@ class Harvest
     elsif check =~ /hammer/
       part = "hammer"
     end
-    fput "put #{part} in my sack"
+    if part == "leg" ||
+    part == "needle" ||
+    part == "spring" ||
+    part == "disc"
+      fput "put #{part} in my sack"
+    else
+      fput "drop #{part}"
+    end
   end
 end

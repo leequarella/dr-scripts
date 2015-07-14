@@ -4,12 +4,19 @@ class Attack
   /You aren't close enough to attack/,
   /Wouldn't it be better if you used a melee weapon/])
 
-  def initialize(verb)
+  def initialize(verb, stealth=false)
     @killed = false
+    hide if stealth
     check = dothis(verb, DEAD_MATCHES)
     waitrt?
     @killed = killed? check
     @no_critters = no_critters? check
+  end
+
+  def hide
+    fput "hide"
+    pause 0.2
+    waitrt?
   end
 
   def killed? thing
