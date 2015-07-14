@@ -46,6 +46,8 @@ class Shooter
   def take_weapon weapon
     if weapon == "crossbow"
       get_crossbow
+    elsif weapon == "long"
+      fput "remove my #{weapon}"
     else
       fput "take my #{weapon}"
     end
@@ -54,6 +56,8 @@ class Shooter
   def stow_weapon weapon
     if weapon == "crossbow"
       stow_crossbow
+    elsif weapon == "long"
+      fput "wear my #{weapon}"
     else
       fput "stow my #{weapon}"
     end
@@ -88,7 +92,7 @@ while true
 
   combat_trainer.next
 
-  Shooter.new(creature, "bow", "arrow")      unless SkillCheck.locked?("bow")
+  Shooter.new(creature, "long", "arrow")      unless SkillCheck.locked?("bow")
   pause 1
   Shooter.new(creature, "crossbow", "bolt")  unless SkillCheck.locked?("crossbow")
   pause 1
