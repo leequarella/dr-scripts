@@ -4,13 +4,14 @@ load "scripts/lee/attack.rb"
 load "scripts/lee/combat_assessment.rb"
 
 class KillCritter
-  def initialize(attack_type="jab")
+  def initialize(attack_type="jab", stealth=false)
     @attack_type = attack_type
+    @stealth = stealth
     attack_until_dead
   end
 
   def attack_until_dead
-    result = Attack.new(@attack_type).killed
+    result = Attack.new(@attack_type, @stealth).killed
     waitrt?
     if result == true
       killed_critter
@@ -26,5 +27,5 @@ class KillCritter
 end
 
 while true do
-  KillCritter.new script.vars[0]
+  KillCritter.new(script.vars[0], false)
 end

@@ -13,6 +13,7 @@ class KillCritter
 
   def attack_until_dead_with weapon, critter
     fput "get #{weapon}"
+    pause 0.2
     result = Attack.new("lob").killed
     waitrt?
     if result == true

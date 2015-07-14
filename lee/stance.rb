@@ -14,5 +14,11 @@ class Stance
       fput "stance shield 91"
       fput "stance evasion 92"
     end
+
+    def zero
+      fput "stance parry 0"
+      fput "stance shield 0"
+      fput "stance evasion 0"
+    end
   end
 end

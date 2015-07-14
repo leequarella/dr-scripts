@@ -12,7 +12,7 @@ class Loot
 
   def initialize
     pause 1
-    check = dothis "loot", LOOT
+    check = dothis "loot all", LOOT
     waitrt?
     grab_stuff if check =~ /was carrying/
   end

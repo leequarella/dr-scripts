@@ -14,7 +14,7 @@ class Tailor
   ])
 
   MEASURE = Regexp.union([
-    /now it is time to cut away more of the leather with scissors/,
+    /scissors/,
     /Roundtime/
   ])
 
@@ -109,7 +109,7 @@ class Tailor
     check = dothis "measure #{@item} with yard", MEASURE
     waitrt?
     fput "stow yard"
-    if check =~ /now it is time to cut away more of the leather with scissors/
+    if check =~ /scissors/
       make(scissors)
     else
       make(sew)
@@ -117,10 +117,64 @@ class Tailor
   end
 
   def done
+    bundle_with_logbook
     fput "******************************** DONE"
     false
   end
+
+  def bundle_with_logbook
+    fput "stow"
+    fput "get log"
+    fput "bund #{@item} with log"
+  end
 end
 
-item = script.vars[1]
-Tailor.new(item)
+class StartTailor
+  STARTED = Regexp.union([
+    /What were you referring to/,
+    /You get/
+  ])
+  def initialize(material, product)
+    @product = product
+    @material = material
+    check = dothis "get my #{@product}", STARTED
+    next_step check
+  end
+
+  def next_step check
+    if check =~ /What were you referring to/
+      start
+    end
+  end
+
+  def start
+    study_book
+    fput 'get sci'
+    fput "get #{@material}"
+    fput "cut #{@material} with sci"
+    waitrt?
+    fput 'stow'
+    fput "get #{@material}"
+    fput 'stow'
+  end
+
+  def study_book
+    fput "get my book"
+    fput "study my book"
+    pause 0.2
+    waitrt?
+    fput "stow my book"
+  end
+end
+
+material = script.vars[1]
+item = script.vars[2]
+
+quantity = script.vars[3].nil? ? 1 : script.vars[3].to_i
+
+quantity.times do
+  fput "stow left"
+  fput "stow right"
+  StartTailor.new(material, item)
+  Tailor.new(item)
+end

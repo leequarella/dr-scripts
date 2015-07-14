@@ -1,6 +1,7 @@
 fput "rem warhorn"
 waitrt?
 fput "exhale warhorn lure"
+pause 0.3
 waitrt?
 fput "wear my warhorn"
 waitrt?
