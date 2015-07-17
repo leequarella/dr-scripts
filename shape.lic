@@ -1,8 +1,8 @@
 class Shape
   WORKING = Regexp.union([
     /carving knife/,
-    /Shaping with a wood shaper is needed/,
-    /A bulbous knot will make continued shaping difficult unless rubbed out with a rasp/,
+    /shaper is needed/,
+    /with a rasp/,
     /you complete working/,
     /clamps/,
     /wood stain/,
@@ -51,10 +51,10 @@ class Shape
     elsif check =~ /clamps/
       clamps
 
-    elsif check =~ /Shaping with a wood shaper is needed/
+    elsif check =~ /shaper is needed/
       shaper
 
-    elsif check =~ /A bulbous knot will make continued shaping difficult unless rubbed out with a rasp/
+    elsif check =~ /with a rasp/
       rasp
 
     elsif check =~ /wood stain/

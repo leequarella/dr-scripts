@@ -80,7 +80,7 @@ class Tailor
   end
 
   def sew
-    fput "get needle"
+    fput "get sew needle"
    "push #{@item} with needle"
   end
 

@@ -8,9 +8,11 @@ class ShootBow
     fput "load"
     pause 1
     waitrt?
-    fput "aim"
-    pause 1
-    waitrt?
+    2.times do
+      fput "aim"
+      pause 1
+      waitrt?
+    end
     waitfor "You think you have your best shot possible now"
     result = Attack.new("shoot").killed
     pause 1
