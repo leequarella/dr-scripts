@@ -1,6 +1,3 @@
-material = script.vars[1]
-item = script.vars[2]
-
 class Tailor
   WORKING = Regexp.union([
    /One leather piece is too thick/,
