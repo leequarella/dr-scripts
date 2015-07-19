@@ -7,6 +7,7 @@ class Tailor
    /The fabric develops wrinkles from all the handling and could use a quick ironing/,
    /A deep crease develops along the fabric, bunching it together awkwardly/,
    /Roundtime/,
+   /small cloth padding/,
    /You realize that cannot be repaired, and stop/,
   ])
 
@@ -166,12 +167,15 @@ end
 
 material = script.vars[1]
 item = script.vars[2]
-
 quantity = script.vars[3].nil? ? 1 : script.vars[3].to_i
+
+i=1
 
 quantity.times do
   fput "stow left"
   fput "stow right"
   StartTailor.new(material, item)
   Tailor.new(item)
+  echo "Done #{i} of #{quantity}."
+  i += 1
 end

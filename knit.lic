@@ -126,9 +126,13 @@ end
 item = script.vars[1]
 quantity = script.vars[2].nil? ? 1 : script.vars[2].to_i
 
+i=1
+
 quantity.times do
   fput "stow left"
   fput "stow right"
   StartKnitting.new(item)
   Knit.new(item)
+  echo "Done #{i} of #{quantity}."
+  i += 1
 end
