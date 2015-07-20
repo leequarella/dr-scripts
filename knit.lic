@@ -1,0 +1,138 @@
+class Knit
+  WORKING = Regexp.union([
+   /be turned/,
+   /by turning/,
+   /be pushed/,
+   /cast off/,
+   /Roundtime/,
+   /You realize that cannot be repaired, and stop/,
+  ])
+
+  FIRST_STEP = Regexp.union([
+    /turned/,
+    /push the needles/,
+    /cast to finish/,
+    /knitting/,
+  ])
+
+  def initialize(item)
+    @item = item
+    check = dothis("analyze #{@item}", FIRST_STEP)
+    waitrt?
+    make(first_step? check)
+  end
+
+  def make(next_step)
+    check = dothis(next_step, WORKING)
+    waitrt?
+    next_step = next_step? check
+    make(next_step) if next_step
+  end
+
+  def first_step? check
+    if check =~ /turned/
+      turn
+    elsif check =~ /push the needles/
+      push
+    elsif check =~ /cast to finish/
+      cast_off
+      nil
+    else
+      knit
+    end
+  end
+
+  def next_step? check
+    if check =~ /be turned/ || check =~ /by turning/
+      turn
+    elsif check =~ /be pushed/
+      push
+    elsif check =~ /cast off/
+      cast_off
+      nil
+    else
+      knit
+    end
+  end
+
+  def knit
+   "knit needle"
+  end
+
+  def turn
+    "turn needle"
+  end
+
+  def push
+    "push needle"
+  end
+
+  def cast_off
+    fput "cast my needle"
+    pause 1
+    waitrt?
+    done
+  end
+
+  def done
+    bundle_with_logbook
+    fput "******************************** DONE"
+    false
+  end
+
+  def bundle_with_logbook
+    fput "stow left"
+    fput "get log"
+    fput "bund #{@item} with log"
+  end
+end
+
+
+class StartKnitting
+  STARTED = Regexp.union([
+    /What were you referring to/,
+    /You get/
+  ])
+  def initialize(product)
+    @product = product
+    check = dothis "get my #{@product}", STARTED
+    next_step check
+  end
+
+  def next_step check
+    if check =~ /What were you referring to/
+      start
+    end
+  end
+
+  def start
+    study_book
+    fput "get yarn"
+    fput 'get kn need'
+    fput "knit yarn with needle"
+    waitrt?
+    fput 'stow'
+  end
+
+  def study_book
+    fput "get my book"
+    fput "study my book"
+    pause 0.2
+    waitrt?
+    fput "stow my book"
+  end
+end
+
+item = script.vars[1]
+quantity = script.vars[2].nil? ? 1 : script.vars[2].to_i
+
+i=1
+
+quantity.times do
+  fput "stow left"
+  fput "stow right"
+  StartKnitting.new(item)
+  Knit.new(item)
+  echo "Done #{i} of #{quantity}."
+  i += 1
+end

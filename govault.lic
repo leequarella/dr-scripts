@@ -1,4 +1,19 @@
-if  script.vars[1] == "out"
+class GoArch
+  NOPE = Regexp.union([
+    /escorts you/,
+  ])
+  def initialize
+    go_arch "blackwood"
+  end
+  def go_arch(type = "")
+    check = dothis "go #{type} arch", NOPE
+    if check =~ /Sorry/
+      go_arch "ironwood"
+    end
+  end
+end
+
+if script.vars[1]
   fput "close vault"
   fput "go door"
   fput "go arch"
@@ -7,8 +22,9 @@ if  script.vars[1] == "out"
 else
   fput "go squa"
   fput "go door"
-  fput "go arch"
+  GoArch.new
   fput "pull lev"
   fput "go door"
   fput "open vault"
 end
+

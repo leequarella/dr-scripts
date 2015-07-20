@@ -1,8 +1,8 @@
 class Shape
   WORKING = Regexp.union([
     /carving knife/,
-    /Shaping with a wood shaper is needed/,
-    /A bulbous knot will make continued shaping difficult unless rubbed out with a rasp/,
+    /with a wood shaper/,
+    /with a rasp/,
     /you complete working/,
     /clamps/,
     /wood stain/,
@@ -45,16 +45,17 @@ class Shape
   end
 
   def next_step? check
+    echo check
     if check =~ /carving knife/
       knife
 
     elsif check =~ /clamps/
       clamps
 
-    elsif check =~ /Shaping with a wood shaper is needed/
+    elsif check =~ /with a wood shaper/
       shaper
 
-    elsif check =~ /A bulbous knot will make continued shaping difficult unless rubbed out with a rasp/
+    elsif check =~ /with a rasp/
       rasp
 
     elsif check =~ /wood stain/
@@ -148,14 +149,17 @@ class StartShape
 end
 
 product = script.vars[1]
-
 quantity = script.vars[2].nil? ? 1 : script.vars[2].to_i
+
+i=1
 
 quantity.times do
   fput "stow left"
   fput "stow right"
   StartShape.new(product)
   Shape.new(product)
+  echo "Done #{i} of #{quantity}."
+  i += 1
 end
 
 #This work order appears to be complete
