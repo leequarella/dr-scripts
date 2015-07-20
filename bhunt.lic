@@ -29,30 +29,51 @@ WEAPONS = [small_edged, large_edged, small_blunt]
 appr = Appraisal.new
 
 while true do
-  Tactics.new      unless SkillCheck.locked?("tactics")
-  pause 1
+  unless SkillCheck.locked?("tactics")
+    pause 0.25
+    Tactics.new
+    pause 0.25
+  end
 
-  Debilitation.new unless SkillCheck.locked?("debilitation")
-  pause 1
+  unless SkillCheck.locked?("debilitation")
+    Debilitation.new
+    pause 0.25
+  end
 
-  Warding.new      unless SkillCheck.locked?("warding")
-  pause 1
+  unless SkillCheck.locked?("warding")
+    pause 0.25
+    Warding.new
+    pause 0.25
+  end
 
-  Augmentation.new unless SkillCheck.locked?("augmentation")
-  pause 1
+  unless SkillCheck.locked?("augmentation")
+    pause 0.25
+    Augmentation.new
+    pause 0.25
+  end
 
-  appr.next        unless SkillCheck.locked?("appraisal")
-  pause 1
+  unless SkillCheck.locked?("appraisal")
+    pause 0.25
+    appr.next
+    pause 0.25
+  end
 
-  Perception.new   unless SkillCheck.locked?("perception")
-  pause 1
+  unless SkillCheck.locked?("perception")
+    pause 0.25
+    Perception.new
+    pause 0.25
+  end
 
-  Expertise.new    unless SkillCheck.locked?("expertise")
-  pause 1
+  unless SkillCheck.locked?("perception")
+    pause 0.25
+    Expertise.new    unless SkillCheck.locked?("expertise")
+    pause 0.25
+  end
 
 
   WEAPONS.each do |weap|
     unless SkillCheck.locked?(weap[:skill])
+      pause 0.3
       WeaponTrainer.new({
         weapon:      weap[:weapon],
         attack_type: weap[:attack_type],
@@ -60,7 +81,7 @@ while true do
       })
       CombatAssessment.new
     end
-    pause 1
+    pause 0.3
   end
 
   unless SkillCheck.locked?("brawl")
