@@ -78,26 +78,46 @@ Stance.missle
 
 appr = Appraisal.new
 combat_trainer = CombatTrainer.new(appr)
+watchhealth(50) { fput "exit" }
 
 while true
-  5.times do
-    SpearChucker.new(creature)                 unless SkillCheck.locked?("heavy thrown")
-    pause 1
+  unless SkillCheck.locked?("heavy thrown")
+    6.times do
+      SpearChucker.new(creature) unless SkillCheck.locked?("heavy thrown")
+      pause 1
+    end
   end
 
-  5.times do
-    BoomerangChucker.new(creature)             unless SkillCheck.locked?("light thrown")
-    pause 1
+  unless SkillCheck.locked?("light thrown")
+    6.times do
+      BoomerangChucker.new(creature) unless SkillCheck.locked?("light thrown")
+      pause 1
+    end
   end
 
   combat_trainer.next
 
-  Shooter.new(creature, "long", "arrow")      unless SkillCheck.locked?("bow")
-  pause 1
-  Shooter.new(creature, "crossbow", "bolt")  unless SkillCheck.locked?("crossbow")
-  pause 1
-  Shooter.new(creature, "sling", "sm rock")  unless SkillCheck.locked?("sling")
-  pause 1
+  unless SkillCheck.locked?("bow")
+    3.times do
+      Shooter.new(creature, "long", "arrow") unless SkillCheck.locked?("bow")
+      pause 1
+    end
+  end
+
+  unless SkillCheck.locked?("crossbow")
+    2.times do
+      Shooter.new(creature, "crossbow", "bolt") unless SkillCheck.locked?("crossbow")
+      pause 1
+    end
+  end
+
+  unless SkillCheck.locked?("sling")
+    3.times do
+      Shooter.new(creature, "sling", "sm rock") unless SkillCheck.locked?("sling")
+      pause 1
+    end
+  end
+
   RecoverAmmo.new('bolt')
   RecoverAmmo.new('arrow')
   RecoverAmmo.new('sm rock')
