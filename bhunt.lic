@@ -37,6 +37,7 @@ while true do
   end
 
   unless SkillCheck.locked?("debilitation")
+    pause 0.25
     Debilitation.new
     pause 0.25
   end
