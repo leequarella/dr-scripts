@@ -5,7 +5,7 @@ class Skin
   ])
 
   def initialize(arrange=nil)
-    arrange_critter# if arrange
+    arrange_critter #if arrange
     skin
   end
 

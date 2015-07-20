@@ -19,6 +19,7 @@ fput 'stow right'
 
 Stance.zero
 Stance.balanced
+watchhealth(50) { fput "exit" }
 
 
 small_edged = {skill: "small edge",  weapon: "telek",  attack_type: "jab", left: true}
