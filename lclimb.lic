@@ -1,0 +1,62 @@
+load "scripts/lee/skill_check.rb"
+
+FALLEN = Regexp.union([
+  /slip after a few feet/,
+  /You must be standing/,
+])
+
+FAIL = Regexp.union([
+  /steepness is intimidating/,
+  /seem to find purchase/,
+  /find it hard going/,
+  /your footing is questionable/,
+  /A wave of dizziness hits you/,
+  /Struck by vertigo/,
+  /go back the way you came./,
+])
+
+PASS = Regexp.union([
+  /Outside East Wall, Footpath/,
+  /Northeast Wilds, Outside Northeast Gate/,
+  /Crossing/,
+  /Eastern Tier, Outside Gate/,
+  /Outside East Wall, Footpath/,
+  /Mycthengelde, Flatlands/,
+  /Northwall Trail, Wooded Grove/,
+])
+
+
+class Climb
+  def initialize(rooms)
+    @rooms = rooms
+    @current_room = 0
+    rooms.each do |id, things|
+      climb(id, things)
+    end
+  end
+
+  def climb(id, things)
+    goto id
+    things.each do |thing|
+      fput "climb #{thing}"
+      pause 0.25
+      waitrt?
+      fput "stand"
+    end
+  end
+
+  def goto(id)
+    echo "Going to room id: #{id}."
+    start_script "go2", [id]
+    until running?("go2") == false
+      pause 0.1
+    end
+  end
+end
+
+rooms ={
+  1040 => ["wall"],
+  835 => ["break", "embrasure"],
+}
+
+Climb.new(rooms) while !SkillCheck.locked?("athletics")

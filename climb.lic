@@ -1,0 +1,594 @@
+#CLIMB
+
+ECHO ""
+ECHO "*** Start just outside the Rangers Guild. ***"
+ECHO ""
+
+CLIMB.EXP:
+pause
+put exp athletics
+match DONE mind lock
+match START EXP HELP for more information
+
+START:
+move s
+move go gate
+move e
+move e
+move s
+move s
+move e
+move e
+move e
+move e
+move n
+move e
+move e
+move n
+move n
+move e
+move go stair
+move south
+goto CLIMB01
+
+CLIMB01:
+SAVE CLIMB01
+match PASS01 [Outside East Wall, Footpath]
+match FALLEN slip after a few feet
+match FALLEN You must be standing
+match FAIL01 steepness is intimidating
+match FAIL01 cant seem to find purchase
+match FAIL01 find it hard going.
+match FAIL01 your footing is questionable
+match FAIL01 A wave of dizziness hits you
+match FAIL01 Struck by vertigo
+match FAIL01 go back the way you came.
+match retreat engaged
+put climb break
+matchwait
+
+PASS01:
+wait
+pause 1
+move n
+move go gate
+move west
+move go stair
+move south
+goto CLIMB02
+
+Fail01:
+pause
+goto CLIMB02
+
+CLIMB02:
+SAVE CLIMB02
+match PASS02 [Northeast Wilds, Outside Northeast Gate]
+match FALLEN slip after a few feet
+match FALLEN You must be standing
+match FAIL02 steepness is intimidating
+match FAIL02 cant seem to find purchase
+match FAIL02 find it hard going.
+match FAIL02 your footing is questionable
+match FAIL02 A wave of dizziness hits you
+match FAIL02 Struck by vertigo
+match FAIL02 go back the way you came.
+match retreat engaged
+put climb embrasure
+matchwait
+
+Fail02:
+pause
+move n
+move go stair
+move e
+move go gate
+goto PASS02
+
+Pass02:
+move go footpath
+goto CLIMB03
+
+CLIMB03:
+SAVE CLIMB03
+match PASS03 [Crossing,
+match FALLEN slip after a few feet
+match FALLEN You must be standing
+match FAIL03 steepness is intimidating
+match FAIL03 cant seem to find purchase
+match FAIL03 find it hard going.
+match FAIL03 your footing is questionable
+match FAIL03 A wave of dizziness hits you
+match FAIL03 Struck by vertigo
+match FAIL03 go back the way you came.
+match retreat engaged
+put climb wall
+matchwait
+
+PASS03:
+pause
+move n
+move go stair
+move e
+move go gate
+move go footpath
+goto FAIL03
+
+FAIL03:
+pause 1
+move s
+move down
+move s
+move s
+move sw
+goto CLIMB04
+
+CLIMB04:
+SAVE CLIMB04
+match PASS04 [Crossing,
+match FALLEN slip after a few feet
+match FALLEN You must be standing
+match FAIL04 steepness is intimidating
+match FAIL04 cant seem to find purchase
+match FAIL04 find it hard going.
+match FAIL04 your footing is questionable
+match FAIL04 A wave of dizziness hits you
+match FAIL04 Struck by vertigo
+match FAIL04 go back the way you came.
+match retreat engaged
+put climb wall
+matchwait
+
+PASS04:
+pause
+move s
+move go stair
+move go gate
+move go bush
+move n
+goto CLIMB05
+
+FAIL04:
+pause
+move s
+goto CLIMB05
+
+CLIMB05:
+SAVE CLIMB05
+match PASS05 [Crossing,
+match FALLEN slip after a few feet
+match FALLEN You must be standing
+match FAIL05 steepness is intimidating
+match FAIL05 cant seem to find purchase
+match FAIL05 find it hard going.
+match FAIL05 your footing is questionable
+match FAIL05 A wave of dizziness hits you
+match FAIL05 Struck by vertigo
+match FAIL05 go back the way you came.
+match retreat engaged
+put climb wall
+matchwait
+
+PASS05:
+pause 1
+move s
+move go stair
+move go gate
+gogo CLIMB06
+
+FAIL05:
+pause 1
+move s
+goto CLIMB06
+
+CLIMB06:
+SAVE CLIMB06
+match PASS06 [Crossing, East Gate Battlements]
+match PASS061 [Crossing, East Wall Battlements]
+match FALLEN slip after a few feet
+match FALLEN You must be standing
+match FAIL06 steepness is intimidating
+match FAIL06 cant seem to find purchase
+match FAIL06 find it hard going.
+match FAIL06 your footing is questionable
+match FAIL06 A wave of dizziness hits you
+match FAIL06 Struck by vertigo
+match FAIL06 go back the way you came.
+match retreat engaged
+put climb wall
+matchwait
+
+PASS061:
+pause
+move s
+goto CLIMB07
+
+PASS06:
+pause
+goto CLIMB07
+
+FAIL06:
+put ret
+wait
+put ret
+move go gate
+move go stair
+goto CLIMB07
+
+CLIMB07:
+SAVE CLIMB07
+match PASS07 [Eastern Tier, Outside Gate]
+match FALLEN slip after a few feet
+match FALLEN You must be standing
+match FAIL07 steepness is intimidating
+match FAIL07 cant seem to find purchase
+match FAIL07 find it hard going.
+match FAIL07 your footing is questionable
+match FAIL07 A wave of dizziness hits you
+match FAIL07 Struck by vertigo
+match FAIL07 go back the way you came.
+match retreat engaged
+put climb embrasure
+matchwait
+
+PASS07:
+pause 1
+put ret
+wait
+put ret
+move go gate
+move go stair
+goto FAIL07
+
+FAIL07:
+pause 1
+move n
+goto CLIMB08
+
+CLIMB08:
+SAVE CLIMB08
+match PASS08 [Outside East Wall, Footpath]
+match FALLEN slip after a few feet
+match FALLEN You must be standing
+match FAIL08 steepness is intimidating
+match FAIL08 cant seem to find purchase
+match FAIL08 find it hard going.
+match FAIL08 your footing is questionable
+match FAIL08 A wave of dizziness hits you
+match FAIL08 Struck by vertigo
+match FAIL08 go back the way you came.
+match retreat engaged
+put climb break
+matchwait
+
+PASS08:
+pause 1
+move s
+move go gate
+move go stair
+move n
+goto CLIMB09
+
+FAIL08:
+pause
+goto CLIMB09
+
+CLIMB09:
+SAVE CLIMB09
+match PASS09 [Outside East Wall, Footpath]
+match FALLEN slip after a few feet
+match FALLEN You must be standing
+match FAIL09 steepness is intimidating
+match FAIL09 cant seem to find purchase
+match FAIL09 find it hard going.
+match FAIL09 your footing is questionable
+match FAIL09 A wave of dizziness hits you
+match FAIL09 Struck by vertigo
+match FAIL09 go back the way you came.
+match retreat engaged
+put climb embrasure
+matchwait
+
+PASS09:
+pause 1
+move s
+move s
+move go gate
+goto TRAVEL01
+
+FAIL09:
+pause 1
+move s
+move go stair
+goto TRAVEL01
+
+TRAVEL01:
+pause 0.5
+move w
+move w
+move w
+move w
+move nw
+move n
+move n
+move n
+move n
+move n
+move n
+move w
+move w
+move w
+move w
+move go bridge
+move w
+move w
+move w
+move w
+move go stair
+move s
+
+CLIMB10:
+SAVE CLIMB10
+match PASS10 [Mycthengelde, Flatlands]
+match FALLEN slip after a few feet
+match FALLEN You must be standing
+match FAIL10 steepness is intimidating
+match FAIL10 cant seem to find purchase
+match FAIL10 find it hard going.
+match FAIL10 your footing is questionable
+match FAIL10 A wave of dizziness hits you
+match FAIL10 Struck by vertigo
+match FAIL10 go back the way you came.
+match retreat engaged
+put climb embrasure
+matchwait
+
+PASS10:
+pause
+goto CLIMB11
+
+FAIL10:
+pause
+move n
+move go stair
+move go gate
+move nw
+goto CLIMB11
+
+CLIMB11:
+SAVE CLIMB11
+match PASS11 [Crossing, West Wall Battlements]
+match FALLEN slip after a few feet
+match FALLEN You must be standing
+match FAIL11 steepness is intimidating
+match FAIL11 cant seem to find purchase
+match FAIL11 find it hard going.
+match FAIL11 your footing is questionable
+match FAIL11 A wave of dizziness hits you
+match FAIL11 Struck by vertigo
+match FAIL11 go back the way you came.
+match retreat engaged
+put climb wall
+matchwait
+
+PASS11:
+pause
+move n
+goto CLIMB12
+
+FAIL11:
+pause
+move se
+move go gate
+move go stair
+goto CLIMB12
+
+CLIMB12:
+SAVE CLIMB12
+match PASS12 [Mycthengelde, Flatlands]
+match FALLEN slip after a few feet
+match FALLEN You must be standing
+match FAIL12 steepness is intimidating
+match FAIL12 cant seem to find purchase
+match FAIL12 find it hard going.
+match FAIL12 your footing is questionable
+match FAIL12 A wave of dizziness hits you
+match FAIL12 Struck by vertigo
+match FAIL12 go back the way you came.
+match retreat engaged
+put climb embrasure
+matchwait
+
+PASS12:
+pause
+move go gate
+move go stair
+goto FAIL12
+
+FAIL12:
+move e
+goto CLIMB13
+
+CLIMB13:
+SAVE CLIMB13
+match PASS13 [Northwall Trail, Wooded Grove]
+match FALLEN slip after a few feet
+match FALLEN You must be standing
+match FAIL13 steepness is intimidating
+match FAIL13 cant seem to find purchase
+match FAIL13 find it hard going.
+match FAIL13 your footing is questionable
+match FAIL13 A wave of dizziness hits you
+match FAIL13 Struck by vertigo
+match FAIL13 go back the way you came.
+match retreat engaged
+put climb break
+matchwait
+
+PASS13:
+pause
+move s
+move go gate
+move go stair
+move e
+goto CLIMB14
+
+FAIL13:
+pause
+goto CLIMB14
+
+CLIMB14:
+SAVE CLIMB14
+match PASS14 [Northwall Trail, Wooded Grove]
+match FALLEN slip after a few feet
+match FALLEN You must be standing
+match FAIL14 steepness is intimidating
+match FAIL14 cant seem to find purchase
+match FAIL14 find it hard going.
+match FAIL14 your footing is questionable
+match FAIL14 A wave of dizziness hits you
+match FAIL14 Struck by vertigo
+match FAIL14 go back the way you came.
+match retreat engaged
+put climb embrasure
+matchwait
+
+PASS14:
+pause
+goto CLIMB15
+
+FAIL14:
+pause
+move w
+move go stair
+move go gate
+move go trail
+move ne
+goto CLIMB15
+
+CLIMB15:
+SAVE CLIMB15
+match PASS15 [Crossing, North Wall Battlements]
+match FALLEN slip after a few feet
+match FALLEN You must be standing
+match FAIL15 steepness is intimidating
+match FAIL15 cant seem to find purchase
+match FAIL15 find it hard going.
+match FAIL15 your footing is questionable
+match FAIL15 A wave of dizziness hits you
+match FAIL15 Struck by vertigo
+match FAIL15 go back the way you came.
+match retreat engaged
+put climb wall
+matchwait
+
+PASS15:
+pause
+move w
+move go stair
+move go gate
+move go strail
+goto CLIMB16
+
+FAIL15:
+pause
+move sw
+goto CLIMB16
+
+CLIMB16:
+SAVE CLIMB16
+match PASS16 [Crossing, North Wall Battlements]
+match FALLEN slip after a few feet
+match FALLEN You must be standing
+match FAIL16 steepness is intimidating
+match FAIL16 cant seem to find purchase
+match FAIL16 find it hard going.
+match FAIL16 your footing is questionable
+match FAIL16 A wave of dizziness hits you
+match FAIL16 Struck by vertigo
+match FAIL16 go back the way you came.
+match retreat engaged
+put climb wall
+matchwait
+
+PASS16:
+pause
+move w
+move go stair
+move go gate
+goto CLIMB17
+
+FAIL16:
+pause
+move s
+goto CLIMB17
+
+CLIMB17:
+SAVE CLIMB17
+match PASS17 [Crossing, North Wall Battlements]
+match FALLEN slip after a few feet
+match FALLEN You must be standing
+match FAIL17 steepness is intimidating
+match FAIL17 cant seem to find purchase
+match FAIL17 find it hard going.
+match FAIL17 your footing is questionable
+match FAIL17 A wave of dizziness hits you
+match FAIL17 Struck by vertigo
+match FAIL17 go back the way you came.
+match retreat engaged
+put climb wall
+matchwait
+
+PASS17:
+move go stair
+goto TRAVEL02
+
+FAIL17:
+move go gate
+goto TRAVEL02
+
+TRAVEL02:
+pause 1
+move e
+move e
+move e
+move e
+move e
+move e
+move e
+move n
+move n
+move w
+move w
+move go gate
+move n
+goto CLIMB.EXP
+
+FALLEN:
+ECHO ""
+ECHO  "*** FALLEN ***"
+ECHO ""
+
+pause
+match STOOD You stand
+match STOOD You are already standing
+match FALLEN cannot manage to stand.
+match FALLEN The weight of all your possessions
+match FALLEN ...wait
+put stand
+matchwait
+
+STOOD:
+goto %s
+
+RETREAT:
+put ret
+put ret
+pause
+goto %s
+
+DONE:
+ECHO ""
+ECHO " *** You are mindlocked in Athletics. ***"
+ECHO ""
+EXIT
