@@ -55,8 +55,19 @@ class Climb
 end
 
 rooms ={
-  1040 => ["wall"],
   835 => ["break", "embrasure"],
+  1035 => ["wall"],
+  1039 => ["wall"],
+  1040 => ["wall"],
+  691 => ["wall"],
+  943 => ["break", "embrasure"],
+  939 => ["embrasure"],
+  1388 => ["wall"],
+  938 => ["embrasure"],
+  940 => ["break", "embrasure"],
+  1611 => ["wall"],
+  1609 => ["wall"],
+  1387 => ["wall"],
 }
 
 Climb.new(rooms) while !SkillCheck.locked?("athletics")

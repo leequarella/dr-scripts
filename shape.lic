@@ -70,21 +70,25 @@ class Shape
 
   def knife
     fput "get knife"
+    waitrt?
     verb = "carve my #{@product} with my knife"
   end
 
   def shaper
     fput "get shaper"
+    waitrt?
     verb = "shape my #{@product} with my shaper"
   end
 
   def rasp
     fput "get rasp"
+    waitrt?
     verb = "rub my #{@product} with my rasp"
   end
 
   def clamps
     fput "get clamps"
+    waitrt?
     verb = "push my #{@product} with my clamps"
   end
 
@@ -141,6 +145,7 @@ class StartShape
 
   def study_book
     fput "get my book"
+    waitrt?
     fput "study my book"
     pause 0.2
     waitrt?
