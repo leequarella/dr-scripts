@@ -46,7 +46,7 @@ while true
 
   unless SkillCheck.locked?("bow")
     3.times do
-      Shooter.new(creature, "long", "arrow") unless SkillCheck.locked?("bow")
+      Shooter.new(creature, "bow", "arrow") unless SkillCheck.locked?("bow")
       pause 1
     end
   end
